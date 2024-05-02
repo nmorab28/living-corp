@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Resident {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROPERTY_RESIDENT_ID")
     private int residentId;
 

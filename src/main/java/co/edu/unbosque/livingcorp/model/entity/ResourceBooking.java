@@ -1,9 +1,6 @@
 package co.edu.unbosque.livingcorp.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 public class ResourceBooking {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BOOKING_ID")
     private int bookingId;
 
