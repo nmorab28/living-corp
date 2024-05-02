@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Property {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROPERTY_ID")
     private int propertyId;
 
@@ -34,7 +35,8 @@ public class Property {
     @Column (name="PROPERTY_DESCRIPCION")
     private String propertyDescription;
 
-    @Column (name="PROPERTY_ADMIN")
+    @ManyToOne
+    @JoinColumn (name="PROPERTY_ADMIN")
     private User propertyAdmin;
 
     @Column (name="IS_AVAILABLE_FOR_RENT")

@@ -1,15 +1,13 @@
 package co.edu.unbosque.livingcorp.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="PROPERTY_RESOURCES")
 public class PropertyResource {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROP_RES_ID")
     private int proResId;
 

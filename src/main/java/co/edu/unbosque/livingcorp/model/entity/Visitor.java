@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class Visitor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPOINTMENT_ID")
     private int appointmentId;
 
