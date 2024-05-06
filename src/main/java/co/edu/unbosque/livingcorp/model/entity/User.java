@@ -2,7 +2,7 @@ package co.edu.unbosque.livingcorp.model.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="WEB_USERS")
@@ -19,7 +19,10 @@ public class User {
     private String userPassword;
 
     @Column (name = "LAST_LOGIN")
-    private LocalDate lastLogin;
+    private LocalDateTime lastLogin;
+
+    @Column (name = "LOGIN_ATTEMPTS")
+    private int loginAttempts;
 
     @Column (name = "IS_BLOCKED")
     private boolean isBlocked;
@@ -32,11 +35,12 @@ public class User {
 
     public User() {}
 
-    public User(String userName, String userEmail, String userPassword, LocalDate lastLogin, boolean isBlocked, boolean isPropertyAdmin, boolean isResidentPropertyOwner) {
+    public User(String userName, String userEmail, String userPassword, LocalDateTime lastLogin, int loginAttempts, boolean isBlocked, boolean isPropertyAdmin, boolean isResidentPropertyOwner) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.lastLogin = lastLogin;
+        this.loginAttempts = loginAttempts;
         this.isBlocked = isBlocked;
         this.isPropertyAdmin = isPropertyAdmin;
         this.isResidentPropertyOwner = isResidentPropertyOwner;
@@ -66,12 +70,20 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public LocalDate getLastLogin() {
+    public LocalDateTime getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(LocalDate lastLogin) {
+    public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public int getLoginAttempts() {
+        return loginAttempts;
+    }
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
     }
 
     public boolean isBlocked() {

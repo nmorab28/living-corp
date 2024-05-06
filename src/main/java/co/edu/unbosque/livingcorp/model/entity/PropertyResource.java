@@ -11,10 +11,12 @@ public class PropertyResource {
     @Column(name = "PROP_RES_ID")
     private int proResId;
 
-    @Column(name = "RESOURCE_ID")
+    @ManyToOne
+    @JoinColumn(name = "RESOURCE_ID")
     private Resource resId;
 
-    @Column(name = "PROPERTY_ID")
+    @ManyToOne
+    @JoinColumn(name = "PROPERTY_ID")
     private Property proId;
 
     @Column(name = "RESOURCE_MIN_PRICE")

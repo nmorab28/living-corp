@@ -36,7 +36,7 @@ public class Property {
     private String propertyDescription;
 
     @ManyToOne
-    @JoinColumn (name="PROPERTY_ADMIN")
+    @JoinColumn(name="PROPERTY_ADMIN")
     private User propertyAdmin;
 
     @Column (name="IS_AVAILABLE_FOR_RENT")

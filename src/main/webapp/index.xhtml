@@ -5,21 +5,640 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta charset="utf-8" />
     <title>USER JSF</title>
     <style>
-        .container {
+        .employee-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+            border: 3px solid #ccc;
+        }
+        .name {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .experience {
+            font-size: 14px;
+            color: #666;
+        }
+        .stars {
+            color: #f5c518;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            margin-top: 10px;
+        }
+        /* general */
+        .centered-heading {
+            text-align: center;
+            color: #2C3E50; /* A dark blue shade */
+            margin-top: 20px;
+        }
+
+        {
+            margin: 0 ;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            flex-wrap: wrap;
+            background: url("resources/demo/img/background/background.png") no-repeat;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        /* Navbar */
+
+
+        .header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: transparent;
+            display: flex;
+            justify-content:space-between ;
+            align-items: center;
+            z-index:100 ;
+        }
+
+        .logo{
+            font-size: 32px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700 ;
+        }
+        .navbar a{
+            position: relative;
+            font-size:  18px;
+            color: #fff;
+            font-weight: 500 ;
+            text-decoration: none;
+            margin-left:40px ;
+
+        }
+        .navbar a::before{
+            content: ' ';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #fff;
+            transition: .3s;
+
+        }
+
+        .navbar a:hover::before{
+            width: 100%;
+        }
+
+
+        /* slider */
+
+        .container{
+            position: relative;
+        }
+        .container .wrapper{
+            width: 60vw;
+            height: 75vh;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+            margin: 5rem auto;
+            overflow: hidden;
+        }
+        .container .wrapper-holder{
+            display: grid;
+            grid-template-columns: repeat(4, 100%);
+            height: 100%;
+            width: 100%;
+            animation: slider 30s ease-in-out infinite alternate;
+        }
+        .container #slider-img-1{
+            background-image: url(resources/demo/img/slider/img.png);
+            background-position: center;
+        }
+        .container #slider-img-2{
+            background-image: url(resources/demo/img/slider/img_1.png);
+            background-position: center;
+        }
+        .container #slider-img-3{
+            background-image: url(resources/demo/img/slider/img_2.png);
+            background-position: center;
+        }
+        .container #slider-img-4{
+            background-image: url(resources/demo/img/slider/img_3.png);
+            background-position: center;
+        }
+        .container .button-holder .button{
+            background-color: white;
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: .3rem;
+        }
+        .container .button-holder{
+            position: absolute;
+            left: 45%;
+            bottom: 0%;
+        }
+        .button:hover{
+            box-shadow: 0px 0px 7px 4px rgba(0, 255, 255, 0.6);
+        }
+        @keyframes slider{
+            0%{transform: translateX(0%);}
+            10%{transform: translateX(-100%);}
+            20%{transform: translateX(-100%);}
+            30%{transform: translateX(-200%);}
+            40%{transform: translateX(-200%);}
+            50%{transform: translateX(-200%);}
+            60%{transform: translateX(-300%);}
+            70%{transform: translateX(-300%);}
+            80%{transform: translateX(-300%);}
+            90%{transform: translateX(0%);}
+            100%{transform: translateX(0%);}
+        }
+
+        /* card */
+
+        .card {
+            flex: 1;
+            max-width: 300px; /* Limit the card width */
+            height: 400px;
+            position: relative;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the cards horizontally */
+            gap: 260px; /* Space between cards */
+        }
+        .card .card_landing {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 5px 10px #000;
+            background: linear-gradient(transparent 80%, #000), var(--i);
+            background-position: center;
+            background-size: cover;
+            z-index: 100;
+        }
+
+        .card .card_landing h6 {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 25px;
+            color: #fff;
+        }
+
+        .card .card_info {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            top: 0;
+            margin: auto;
+            padding: 15px;
+            background: #fff;
+            z-index: 90;
+            box-shadow: 0 5px 10px #000;
+            transition: .5s;
+        }
+
+        .card:hover .card_info {
+            left: 100%;
+        }
+
+        .card_info .head {
+            padding: 5px 0;
+            border-bottom: solid 1px #bc8811;
+        }
+
+        .card_info .head .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #bc8811;
+        }
+
+        .card_info .head .description {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card_info .head .description .item {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .card_info .head .description .item i {
+            color: #bc8811;
+            font-size: 15px;
+        }
+
+        .card_info .head .description .item p {
+            font-size: 13px;
+        }
+
+        .card_info .content {
+            margin-top: 15px;
+        }
+
+        .card_info .content .list {
+            padding: 10px 15px;
+        }
+
+        .card_info .content .list li {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .card_info .action .btn {
+            padding: 10px;
+            color: #fff;
+            width: 100%;
+            text-decoration: none;
+            text-align: center;
+            background: #bc8811;
+            display: block;
+            margin-top: 10px;
+        }
+
+
+        /* footer */
+
+
+        footer{
+            background-color: #a5ccf1;
+        }
+        .footerContainer{
+            width: 100%;
+            padding: 70px 30px 20px ;
+        }
+        .socialIcons{
+            display: flex;
+            justify-content: center;
+        }
+        .socialIcons a{
+            text-decoration: none;
+            padding:  10px;
+            background-color: white;
+            margin: 10px;
+            border-radius: 50%;
+        }
+        .socialIcons a i{
+            font-size: 2em;
+            color: black;
+            opacity: 0,9;
+        }
+        /* Hover affect on social media icon */
+        .socialIcons a:hover{
+            background-color: #111;
+            transition: 0.5s;
+        }
+        .socialIcons a:hover i{
+            color: white;
+            transition: 0.5s;
+        }
+
+        .footerNav ul{
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        .footerNav ul li a{
+            color:white;
+            margin: 20px;
+            text-decoration: none;
+            font-size: 1.3em;
+            opacity: 0.7;
+            transition: 0.5s;
+
+        }
+        .footerNav ul li a:hover{
+            opacity: 1;
+        }
+        .footerBottom{
+            background-color: #d2f9fb;
+            padding: 20px;
+            text-align: center;
+        }
+        .footerBottom p{
+            color: white;
+        }
+        .designer{
+            color: #d6cfcf;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+            margin: 0px 5px;
+        }
+        @media (max-width: 700px){
+            .footerNav ul{
+                flex-direction: column;
+            }
+            .footerNav ul li{
+                width:100%;
+                text-align: center;
+                margin: 10px;
+            }
+            .socialIcons a{
+                padding: 8px;
+                margin: 4px;
+            }
         }
     </style>
 </h:head>
 <h:body>
 
+    <header class="header">
+        <a href="index.xhtml"  class="logo">Living Corp</a>
+        <nav class="navbar">
+            <a href="create_property.xhtml" >Login</a>
+            <a href="contact.xhtml" >Create account </a>
+        </nav>
+
+    </header>
+
+
+
+
     <div class="container">
-        <h1>Living Corp</h1>
+        <h1 class="centered-heading">Lugares donde tenemos inmuebles </h1>
+        <div class="wrapper">
+            <div class="wrapper-holder">
+                <div id="slider-img-1"></div>
+                <div id="slider-img-2"></div>
+                <div id="slider-img-3"></div>
+                <div id="slider-img-4"></div>
+            </div>
+        </div>
+        <div class="button-holder">
+            <a href="#slider-img-1" class="button"></a>
+            <a href="#slider-img-2" class="button"></a>
+            <a href="#slider-img-3" class="button"></a>
+            <a href="#slider-img-4" class="button"></a>
+        </div>
     </div>
+
+
+    <!--::::trabajadores :::::-->
+    <h1 class="centered-heading">Nuestros trabajadores</h1>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/workers/img.png)">
+                <h6>Carlos</h6>
+            </div>
+            <div class="card_info">
+                <div class="head">
+                    <p class="title">Carlos</p>
+                    <div class="description">
+                        <div class="item">
+                            <i class="fa-regular fa-clock"></i>
+                            <p>Vendedor </p>
+                        </div>
+                        <div class="item">
+                            <i class="fa-regular fa-user"></i>
+                            <p>finca raiz</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <p class="title">Qualities:</p>
+                    <ul class="list">
+                        <li>Excellent communication skills</li>
+                        <li>Strong interpersonal skills</li>
+                        <li>Results-driven attitude</li>
+                        <li>Ability to negotiate</li>
+                        <li>Resilience and perseverance</li>
+                        <li>Passion for customer service</li>
+                    </ul>
+                </div>
+
+
+                <div class="action">
+                    <a href="login.xhtml" class="btn">Agenda</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/workers/img_1.png)">
+                <h6>Juana</h6>
+            </div>
+            <div class="card_info">
+                <div class="head">
+                    <p class="title">Juan</p>
+                    <div class="description">
+                        <div class="item">
+                            <i class="fa-regular fa-clock"></i>
+                            <p>Cobranza</p>
+                        </div>
+                        <div class="item">
+                            <i class="fa-regular fa-user"></i>
+                            <p>finzanzas</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <p class="title">Qualities:</p>
+                    <ul class="list">
+                        <li>Excellent communication skills</li>
+                        <li>Strong interpersonal skills</li>
+                        <li>Results-driven attitude</li>
+                        <li>Ability to negotiate</li>
+                        <li>Resilience and perseverance</li>
+                        <li>Passion for customer service</li>
+                    </ul>
+                </div>
+
+
+
+                <div class="action">
+                    <a href="login.xhtml" class="btn">Agenda</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/workers/img_2.png)">
+                <h6>Estefania</h6>
+            </div>
+            <div class="card_info">
+                <div class="head">
+                    <p class="title">Estefania</p>
+                    <div class="description">
+                        <div class="item">
+                            <i class="fa-regular fa-clock"></i>
+                            <p>Diseñadora </p>
+                        </div>
+                        <div class="item">
+                            <i class="fa-regular fa-user"></i>
+                            <p>Decoracion de interior </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <p class="title">Qualities:</p>
+                    <ul class="list">
+                        <li>Excellent communication skills</li>
+                        <li>Strong interpersonal skills</li>
+                        <li>Results-driven attitude</li>
+                        <li>Ability to negotiate</li>
+                        <li>Resilience and perseverance</li>
+                        <li>Passion for customer service</li>
+                    </ul>
+                </div>
+
+
+                <div class="action">
+                    <a href="login.xhtml" class="btn">Agenda</a>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!--::::clientes review:::::-->
+
+    <h1 class="centered-heading">Algunas Experiencia de nuestros clientes</h1>
+
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/experience/img_3.png)">
+                <h6>Famila perez</h6>
+            </div>
+            <div class="card_info">
+
+
+                <div class="content">
+                    <div class="name">John Doe</div>
+                    <div class="experience">Buena experiencia</div>
+                    <p:graphicImage name="img/experience/img.png" library="demo" alt="Empleado 2" class="employee-img"/>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+
+                <div class="action">
+                    <a href="#" class="btn">Agenda</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/experience/img_4.png)">
+                <h6>familia Smith</h6>
+            </div>
+            <div class="card_info">
+
+
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="experience">Buena experiencia</div>
+                    <p:graphicImage name="img/experience/img_1.png" library="demo" alt="Empleado 2" class="employee-img"/>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+
+
+                <div class="action">
+                    <a href="login.xhtml" class="btn">Agenda</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <div class="card_landing" style="--i:url(resources/demo/img/experience/img_4.png)">
+                <h6>Estefania</h6>
+            </div>
+            <div class="card_info">
+
+
+
+                <div class="content">
+                    <div class="name">John Doe</div>
+                    <div class="experience">Buena experiencia</div>
+                    <p:graphicImage name="img/experience/img_2.png" library="demo" alt="Empleado 2" class="employee-img"/>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+
+                <div class="action">
+                    <a href="login.xhtml" class="btn">Agenda</a>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--::::Pie de Pagina::::::-->
+    <footer>
+        <div class="footerContainer">
+            <div class="socialIcons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-google-plus"></i></a>
+                <a href=""><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+        </div>
+        <div class="footerBottom">
+            <p>Copyright &copy;2023; Designed by <span class="designer">Noman</span></p>
+        </div>
+    </footer>
+
 </h:body>
 </html>
