@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+    <title>Error 404 - Página no encontrada</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .error-container h1 {
+            color: #DE354C;
+        }
+
+        .error-container h2 {
+            color: #2C3E50;
+        }
+
+        .error-container p {
+            color: #333;
+        }
+
+        .home-link {
+            padding: 10px 20px;
+            background-color: #3498DB;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>¡Ups! Página no encontrada</h1>
+    <h2>Error 404</h2>
+    <p>Lo sentimos, la página que estás buscando no existe o ha sido movida.</p>
+    <h:link outcome="/index" value="Volver a la página principal" class="home-link"/>
+</div>
+</body>
+</html>

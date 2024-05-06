@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="utf-8" />
+    <title>Reserva de Apartamento</title>
+    <style>
+        /* Estilos comunes */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar, .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar a, .footer a {
+            color: white;
+        }
+        .footer {
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .form-field {
+            margin-bottom: 10px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Home" url="index.xhtml" icon="pi pi-home"/>
+                <p:menuitem value="About Us" url="about.xhtml" icon="pi pi-info-circle"/>
+                <p:menuitem value="Contact" url="contact.xhtml" icon="pi pi-envelope"/>
+            </p:menubar>
+        </h:form>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h:form>
+            <p:panel header="Reserva de Cita para Ver Apartamento">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="nombre" value="Nombre:"/>
+                    <p:inputText id="nombre" value="#{reservaBean.nombre}" required="true"/>
+
+                    <h:outputLabel for="email" value="Correo Electrónico:"/>
+                    <p:inputText id="email" value="#{reservaBean.correo}" required="true"/>
+
+                    <h:outputLabel for="trabajador" value="Seleccione un Trabajador:"/>
+                    <p:selectOneMenu id="trabajador" value="#{reservaBean.trabajadorSeleccionado}">
+                        <f:selectItem itemLabel="Seleccione Uno" itemValue=""/>
+                        <f:selectItem itemLabel="Trabajador A" itemValue="A"/>
+                        <f:selectItem itemLabel="Trabajador B" itemValue="B"/>
+                        <f:selectItem itemLabel="Trabajador C" itemValue="C"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel for="fecha" value="Fecha de la Entrevista:"/>
+                    <p:calendar id="fecha" value="#{reservaBean.fecha}" pattern="dd/MM/yyyy"/>
+
+                    <p:commandButton value="Reservar" actionListener="#{reservaBean.reservar}" styleClass="button"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h:form>
+            <p>© 2023 Reserva de Apartamento. Todos los derechos reservados.</p>
+            <p:commandLink value="Política de privacidad" action="privacy.xhtml"/>
+            <p:commandLink value="Términos de uso" action="terms.xhtml"/>
+        </h:form>
+    </div>
+</h:body>
+</html>

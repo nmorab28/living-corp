@@ -22,7 +22,8 @@ public class Visitor {
     @Column(name = "APPOINTMENT_DATETIME")
     private LocalDateTime appointmentDateTime;
 
-    @Column(name = "PROPERTY_ID")
+    @ManyToOne
+    @JoinColumn(name = "PROPERTY_ID")
     private Property propertyId;
 
     public Visitor() {}

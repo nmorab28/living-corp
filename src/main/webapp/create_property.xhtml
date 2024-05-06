@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Registro de Propiedad</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <script src="https://kit.fontawesome.com/b408879b64.js" crossorigin="anonymous"></script>
+    <style>
+        /* Navbar */
+
+
+        .header{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: transparent;
+            display: flex;
+            justify-content:space-between ;
+            align-items: center;
+            z-index:100 ;
+        }
+
+        .logo{
+            font-size: 32px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700 ;
+        }
+        .navbar a{
+            position: relative;
+            font-size:  18px;
+            color: #fff;
+            font-weight: 500 ;
+            text-decoration: none;
+            margin-left:40px ;
+
+        }
+        .navbar a::before{
+            content: ' ';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #fff;
+            transition: .3s;
+
+        }
+
+        .navbar a:hover::before{
+            width: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0 0 0 / .8),rgba(0 0 0 / .8)),url(resources/demo/img/background/img_2.png);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            display:grid;
+            grid-template-columns: repeat(2,50%);
+            padding:20px;
+            gap:10px;
+            width: 1000px;
+            margin-top: 150px; /* add this line */
+        }
+
+        .box-info {
+            color:#fff;
+            display:flex;
+            flex-direction: column;
+            gap:50px;
+        }
+
+        .box-info > h1 {
+            text-align: left;
+            letter-spacing: 5px;
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            gap:25px
+        }
+
+        .data > p {
+            font-size: 1rem;
+        }
+
+        .data > p > i {
+            color:crimson;
+            margin-right: 10px;
+            font-size:25px;
+        }
+
+        .links {
+            display:flex;
+            gap:15px;
+        }
+
+        .links > a {
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            background: crimson;
+            text-align: center;
+            transition: .1s;
+        }
+
+        .links > a > i {
+            color:#fff;
+            line-height: 40px;
+            font-size: 20px;
+        }
+
+        form {
+            display:flex;
+            flex-direction: column;
+            text-align: center;
+            gap:15px;
+        }
+
+        .input-box {
+            position:relative;
+        }
+
+        .input-box > input {
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            outline:none;
+            background: rgba(255 255 255 / .1);
+            border:3px solid transparent;
+            letter-spacing: 1px;
+            transition:.3s;
+            color:#fff;
+
+        }
+
+        .input-box > input::placeholder,
+        .input-box > textarea::placeholder {
+            color:#a3a3a3;
+
+        }
+
+        .input-box > input:focus::placeholder,
+        .input-box > textarea:focus::placeholder {
+            color:transparent;
+        }
+
+        .input-box > input:focus,
+        .input-box > textarea:focus {
+            border-bottom:3px solid crimson;
+            animation: shake .2s;
+        }
+
+        .input-box > textarea {
+            width: 100%;
+            height: 130px;
+            padding: 10px;
+            background: rgba(255 255 255 / .1);
+            border:3px solid transparent;
+            letter-spacing: 1px;
+            outline: none;
+            transition:.3s;
+            color:#fff;
+            letter-spacing: 1.5px;
+        }
+
+        .input-box > i {
+            position:absolute;
+            top:50%;
+            transform: translateY(-50%);
+            right: 10px;
+            color:rgba(255 255 255 / .3);
+            transition: .3s;
+        }
+
+        .input-box > input:focus ~ i {
+            color:crimson;
+        }
+
+        form > button {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            background: crimson;
+            color:#fff;
+            border:none;
+            transition: .1s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        form > button:hover,
+        .links > a:hover {
+            background: rgb(172, 16, 47);
+        }
+
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+            20%, 40%, 60%, 80% {transform: translateX(10px);}
+        }
+
+        @media screen and (max-width:600px) {
+            .container {
+                width: 95%;
+                display: flex;
+                flex-direction: column;
+                gap:20px;
+            }
+
+            .box-info {
+                gap:15px;
+            }
+
+            .box-info > h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+
+</h:head>
+<h:body>
+
+
+
+    <header class="header">
+        <a href="index.xhtml"  class="logo">Living Corp</a>
+        <nav class="navbar">
+            <a href="create_property.xhtml" >Crear Inmueble</a>
+            <a href="management_properety.xhtml" >Gestion de inmuebles</a>
+        </nav>
+
+    </header>
+    <div class="container">
+        <div class="box-info">
+            <h1>Crea un inmueble</h1>
+            <div class="data">
+                <p>recomendacion</p>
+                <p>Crea uninmueble para venta o renta </p>
+                <p>aplican terminos y cindiciones </p>
+            </div>
+
+        </div>
+        <h:form>
+            <div class="input-box">
+                <p:inputText id="propertyName" placeholder="Nombre de la propiedad" value="#{propertyBean.propertyName}" required="true" requiredMessage="El nombre es obligatorio."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyCity" placeholder="Ciudad" value="#{propertyBean.propertyCity}" required="true" requiredMessage="La ciudad es obligatoria."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyAddress1" placeholder="Dirección" value="#{propertyBean.propertyAddress}" required="true" requiredMessage="La dirección es obligatoria."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyArea" placeholder="Área" value="#{propertyBean.propertyArea}" required="true" requiredMessage="El área es obligatoria."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyPrice" placeholder="Precio" value="#{propertyBean.propertyPrice}" required="true" requiredMessage="El precio es obligatorio."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyRooms" placeholder="Habitaciones" value="#{propertyBean.propertyRooms}" required="true" requiredMessage="El número de habitaciones es obligatorio."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputText id="propertyBathrooms" placeholder="Baños" value="#{propertyBean.propertyBathrooms}" required="true" requiredMessage="El número de baños es obligatorio."/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <p:inputTextarea id="propertyDescription" placeholder="Descripción" value="#{propertyBean.propertyDescription}" required="true" requiredMessage="La descripción es obligatoria."/>
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <div class="input-box">
+                <h4>Renta</h4>
+                <p:selectBooleanCheckbox id="isAvailableForRent" value="#{propertyBean.isAvailableForRent}"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+                <h4>venta  </h4>
+                <p:selectBooleanCheckbox id="isAvailableForSale" value="#{propertyBean.isAvailableForSale}"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.registerProperty}" update="@form"/>
+        </h:form>
+    </div>
+
+</h:body>
+</html>

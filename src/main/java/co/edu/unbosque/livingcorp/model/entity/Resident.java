@@ -11,10 +11,12 @@ public class Resident {
     @Column(name = "PROPERTY_RESIDENT_ID")
     private int residentId;
 
-    @Column(name = "PROPERTY_ID")
+    @ManyToOne
+    @JoinColumn(name = "PROPERTY_ID")
     private Property propertyId;
 
-    @Column(name = "USER_NAME")
+    @ManyToOne
+    @JoinColumn(name = "USER_NAME")
     private User userName;
 
     @Column(name = "IS_OWNER")

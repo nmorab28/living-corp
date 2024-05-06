@@ -13,10 +13,12 @@ public class ResourceBooking {
     @Column(name = "BOOKING_ID")
     private int bookingId;
 
-    @Column(name = "USER_NAME")
+    @ManyToOne
+    @JoinColumn(name = "USER_NAME")
     private User userName;
 
-    @Column(name = "PROP_RES_ID")
+    @ManyToOne
+    @JoinColumn(name = "PROP_RES_ID")
     private PropertyResource propertyResourceId;
 
     @Column(name = "BOOKING_DATETIME")
