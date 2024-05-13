@@ -90,7 +90,7 @@
 
             <p:outputLabel for="username" value="Username"/>
             <p:inputText id="username" value="#{userBean.user.userName}" type="text" required="true"
-                         requiredMessage="El nombre de usuario es obligatorio." styleClass="inputText"/>
+                         requiredMessage="El nombre de usuario es obligatorio." maxlength="10" styleClass="inputText"/>
 
             <p:outputLabel for="email" value="Email"/>
             <p:inputText id="email" value="#{userBean.user.userEmail}" required="true"
@@ -101,11 +101,9 @@
 
             <p:outputLabel for="password" value="Password"/>
             <p:password id="password" value="#{userBean.user.userPassword}" type="password" required="true"
-                        requiredMessage="La contraseña es obligatoria." feedback="true" styleClass="inputText"/>
+                        requiredMessage="La contraseña es obligatoria." feedback="true" maxlength="10" styleClass="inputText"/>
 
-
-            <p:commandButton value="Registrar" action="#{userBean.singUp()}" update="@form" styleClass="login-button"/>
-
+            <p:commandButton value="Registrar" action="#{userBean.signUp()}" update="@form" styleClass="login-button"/>
         </h:form>
     </div>
 </h:body>

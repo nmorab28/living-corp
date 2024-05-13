@@ -89,11 +89,11 @@
         <h:form>
             <h1>LOGIN</h1>
 
-            <label for="username">Username</label>
-            <p:inputText id="username" value="#{userBean.user.userName}" styleClass="inputText"/>
+            <p:outputLabel for="username" value="Username"/>
+            <p:inputText id="username" value="#{userBean.user.userName}" styleClass="inputText" required="true"/>
 
-            <label for="password">Password</label>
-            <p:password id="password" value="#{userBean.user.userPassword}" feedback="false" styleClass="inputText"/>
+            <p:outputLabel for="password" value="Password"/>
+            <p:password id="password" value="#{userBean.user.userPassword}" feedback="false" styleClass="inputText" required="true"/>
 
             <p:commandButton value="Login" action="#{userBean.logIn()}" styleClass="login-button" update="@form"/>
         </h:form>

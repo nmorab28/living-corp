@@ -2,6 +2,8 @@ package co.edu.unbosque.livingcorp.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table (name = "PROPERTIES")
 public class Property {
@@ -45,6 +47,9 @@ public class Property {
     @Column (name="IS_AVAILABLE_FOR_SALE")
     private boolean isAvailableForSale;
 
+    @OneToMany(mappedBy = "propertyId", fetch = FetchType.LAZY)
+    private List<Resident> residents;
+
     public Property() {
     }
 
@@ -61,6 +66,22 @@ public class Property {
         this.propertyAdmin = propertyAdmin;
         this.isAvailableForRent = isAvailableForRent;
         this.isAvailableForSale = isAvailableForSale;
+    }
+
+    public Property(int propertyId, String propertyName, String propertyCity, String propertyAddress, int propertyArea, double propertyPrice, int propertyRooms, int propertyBathrooms, String propertyDescription, User propertyAdmin, boolean isAvailableForRent, boolean isAvailableForSale, List<Resident> residents) {
+        this.propertyId = propertyId;
+        this.propertyName = propertyName;
+        this.propertyCity = propertyCity;
+        this.propertyAddress = propertyAddress;
+        this.propertyArea = propertyArea;
+        this.propertyPrice = propertyPrice;
+        this.propertyRooms = propertyRooms;
+        this.propertyBathrooms = propertyBathrooms;
+        this.propertyDescription = propertyDescription;
+        this.propertyAdmin = propertyAdmin;
+        this.isAvailableForRent = isAvailableForRent;
+        this.isAvailableForSale = isAvailableForSale;
+        this.residents = residents;
     }
 
     public int getPropertyId() {
@@ -157,5 +178,13 @@ public class Property {
 
     public void setAvailableForSale(boolean availableForSale) {
         isAvailableForSale = availableForSale;
+    }
+
+    public List<Resident> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<Resident> residents) {
+        this.residents = residents;
     }
 }

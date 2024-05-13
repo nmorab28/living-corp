@@ -8,11 +8,13 @@ import co.edu.unbosque.livingcorp.model.exception.RepeatedObjectException;
 import co.edu.unbosque.livingcorp.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class UserBean implements Serializable {
         }
     }
 
-    public String singUp(){
+    public String signUp(){
         try {
             userService.signUpUser(user);
         } catch (RepeatedObjectException e) {
@@ -61,7 +63,23 @@ public class UserBean implements Serializable {
         } catch (InvalidPasswordException e) {
             return "error_404.xhtml";
         }
-        return "contact.xhtml";
+        return "login.xhtml";
+    }
+
+    public String closeSession() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "index.xhtml";
+    }
+
+    public void verifySession() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+        if (user == null || user.getUserName() == null) {
+            externalContext.redirect(externalContext.getRequestContextPath() + "/login.xhtml");
+        }
     }
 
     public UserDTO getUser() {

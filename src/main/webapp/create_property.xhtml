@@ -247,7 +247,7 @@
 
 
     <header class="header">
-        <a href="index.xhtml"  class="logo">Living Corp</a>
+        <a href="index_admin.xhtml"  class="logo">Living Corp</a>
         <nav class="navbar">
             <a href="create_property.xhtml" >Crear Inmueble</a>
             <a href="management_properety.xhtml" >Gestion de inmuebles</a>
@@ -258,66 +258,65 @@
         <div class="box-info">
             <h1>Crea un inmueble</h1>
             <div class="data">
-                <p>recomendacion</p>
-                <p>Crea uninmueble para venta o renta </p>
+                <p>Recomendacion</p>
+                <p>Crea un inmueble para venta o renta</p>
                 <p>aplican terminos y cindiciones </p>
             </div>
 
         </div>
         <h:form>
             <div class="input-box">
-                <p:inputText id="propertyName" placeholder="Nombre de la propiedad" value="#{propertyBean.propertyName}" required="true" requiredMessage="El nombre es obligatorio."/>
+                <p:inputText id="propertyName" placeholder="Nombre de la propiedad" value="#{propertyBean.property.propertyName}" required="true" requiredMessage="El nombre es obligatorio."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyCity" placeholder="Ciudad" value="#{propertyBean.propertyCity}" required="true" requiredMessage="La ciudad es obligatoria."/>
+                <p:inputText id="propertyCity" placeholder="Ciudad" value="#{propertyBean.property.propertyCity}" required="true" requiredMessage="La ciudad es obligatoria."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyAddress1" placeholder="Dirección" value="#{propertyBean.propertyAddress}" required="true" requiredMessage="La dirección es obligatoria."/>
+                <p:inputText id="propertyAddress" placeholder="Dirección" value="#{propertyBean.property.propertyAddress}" required="true" requiredMessage="La dirección es obligatoria."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyArea" placeholder="Área" value="#{propertyBean.propertyArea}" required="true" requiredMessage="El área es obligatoria."/>
+                <p:inputText id="propertyArea" placeholder="Área" value="#{propertyBean.property.propertyArea}" required="true" requiredMessage="El área es obligatoria."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyPrice" placeholder="Precio" value="#{propertyBean.propertyPrice}" required="true" requiredMessage="El precio es obligatorio."/>
+                <p:inputText id="propertyPrice" placeholder="Precio" value="#{propertyBean.property.propertyPrice}" required="true" requiredMessage="El precio es obligatorio."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyRooms" placeholder="Habitaciones" value="#{propertyBean.propertyRooms}" required="true" requiredMessage="El número de habitaciones es obligatorio."/>
+                <p:inputText id="propertyRooms" placeholder="Habitaciones" value="#{propertyBean.property.propertyRooms}" required="true" requiredMessage="El número de habitaciones es obligatorio."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputText id="propertyBathrooms" placeholder="Baños" value="#{propertyBean.propertyBathrooms}" required="true" requiredMessage="El número de baños es obligatorio."/>
+                <p:inputText id="propertyBathrooms" placeholder="Baños" value="#{propertyBean.property.propertyBathrooms}" required="true" requiredMessage="El número de baños es obligatorio."/>
                 <i class="fa-solid fa-user"></i>
             </div>
-
             <div class="input-box">
-                <p:inputTextarea id="propertyDescription" placeholder="Descripción" value="#{propertyBean.propertyDescription}" required="true" requiredMessage="La descripción es obligatoria."/>
+                <p:inputTextarea id="propertyDescription" placeholder="Descripción" value="#{propertyBean.property.propertyDescription}" required="true" requiredMessage="La descripción es obligatoria."/>
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
-
             <div class="input-box">
-                <h4>Renta</h4>
-                <p:selectBooleanCheckbox id="isAvailableForRent" value="#{propertyBean.isAvailableForRent}"/>
+                <p:outputLabel for="publicacion" value="Administrador" />
+                <p:selectOneMenu id="publicacion" value="#{propertyBean.property.propertyAdmin.userName}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione una publicación --" itemValue="" />
+                    <f:selectItems value="#{propertyBean.selectedAdmins}" />
+                </p:selectOneMenu>
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <div class="input-box">
+                <p:outputLabel for="isAvailableForRent" value="Arriendo" />
+                <p:selectBooleanCheckbox id="isAvailableForRent" value="#{propertyBean.property.availableForRent}"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <p:outputLabel for="isAvailableForSale" value="Venta" />
+                <p:selectBooleanCheckbox id="isAvailableForSale" value="#{propertyBean.property.availableForSale}"/>
                 <i class="fa-solid fa-user"></i>
             </div>
 
-            <div class="input-box">
-                <h4>venta  </h4>
-                <p:selectBooleanCheckbox id="isAvailableForSale" value="#{propertyBean.isAvailableForSale}"/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.registerProperty}" update="@form"/>
+            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.createProperty()}" update="@form"/>
         </h:form>
     </div>
 
