@@ -171,6 +171,9 @@
         <nav class="navbar">
             <a href="search_property.xhtml" >Mira apartamentos</a>
             <a href="#" >Contrata un servicio</a>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" action="#{userBean.closeSession()}" styleClass="nav-button" icon="fa fa-sign-out-alt"/>
+            </h:form>
         </nav>
 
     </header>
