@@ -42,7 +42,7 @@ public class UserService implements Serializable {
         user.setLoginAttempts(0);
         user.setLastLogin(LocalDateTime.now());
         user.setBlocked(false);
-        user.setPropertyAdmin(false);
+        user.setPropertyAdmin(true);
         user.setResidentPropertyOwner(false);
         return mp.map(userDAO.save(mp.map(user, User.class)), UserDTO.class);
     }
@@ -82,7 +82,7 @@ public class UserService implements Serializable {
         if(user.isPropertyAdmin()){
             return "index_admin.xhtml";
         }
-        return "index.xhtml";
+        return "index_user.xhtml";
     }
 
     public UserDTO findUser(String userName) throws ObjectNotFoundException {
@@ -91,6 +91,10 @@ public class UserService implements Serializable {
 
     public List<UserDTO> showUsers(){
         return userDAO.findAll().stream().map(user -> mp.map(user, UserDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> showAdmins(){
+        return userDAO.findAll().stream().filter(User :: isPropertyAdmin).map(user -> mp.map(user, UserDTO.class)).collect(Collectors.toList());
     }
 
     private String hashPassword(String password) throws NoSuchAlgorithmException {

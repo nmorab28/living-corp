@@ -16,6 +16,12 @@ public class ResidentDTO {
         this.isOwner = isOwner;
     }
 
+    public ResidentDTO(PropertyDTO propertyId, UserDTO userName, boolean isOwner) {
+        this.propertyId = propertyId;
+        this.userName = userName;
+        this.isOwner = isOwner;
+    }
+
     public int getResidentId() {
         return residentId;
     }

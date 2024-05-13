@@ -1,5 +1,7 @@
 package co.edu.unbosque.livingcorp.model.dto;
 
+import java.util.List;
+
 public class PropertyDTO {
 
     private int propertyId;
@@ -14,8 +16,10 @@ public class PropertyDTO {
     private UserDTO propertyAdmin;
     private boolean isAvailableForRent;
     private boolean isAvailableForSale;
+    private List<ResidentDTO> residents;
 
     public PropertyDTO() {
+        propertyAdmin = new UserDTO();
     }
 
     public PropertyDTO(int propertyId, String propertyName, String propertyCity, String propertyAddress, int propertyArea, double propertyPrice, int propertyRooms, int propertyBathrooms, String propertyDescription, UserDTO propertyAdmin, boolean isAvailableForRent, boolean isAvailableForSale) {
@@ -31,6 +35,22 @@ public class PropertyDTO {
         this.propertyAdmin = propertyAdmin;
         this.isAvailableForRent = isAvailableForRent;
         this.isAvailableForSale = isAvailableForSale;
+    }
+
+    public PropertyDTO(int propertyId, String propertyName, String propertyCity, String propertyAddress, int propertyArea, double propertyPrice, int propertyRooms, int propertyBathrooms, String propertyDescription, UserDTO propertyAdmin, boolean isAvailableForRent, boolean isAvailableForSale, List<ResidentDTO> residents) {
+        this.propertyId = propertyId;
+        this.propertyName = propertyName;
+        this.propertyCity = propertyCity;
+        this.propertyAddress = propertyAddress;
+        this.propertyArea = propertyArea;
+        this.propertyPrice = propertyPrice;
+        this.propertyRooms = propertyRooms;
+        this.propertyBathrooms = propertyBathrooms;
+        this.propertyDescription = propertyDescription;
+        this.propertyAdmin = propertyAdmin;
+        this.isAvailableForRent = isAvailableForRent;
+        this.isAvailableForSale = isAvailableForSale;
+        this.residents = residents;
     }
 
     public int getPropertyId() {
@@ -127,5 +147,31 @@ public class PropertyDTO {
 
     public void setAvailableForSale(boolean availableForSale) {
         isAvailableForSale = availableForSale;
+    }
+
+    public List<ResidentDTO> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<ResidentDTO> residents) {
+        this.residents = residents;
+    }
+
+    @Override
+    public String toString() {
+        return "PropertyDTO{" +
+                "propertyId=" + propertyId +
+                ", propertyName='" + propertyName + '\'' +
+                ", propertyCity='" + propertyCity + '\'' +
+                ", propertyAddress='" + propertyAddress + '\'' +
+                ", propertyArea=" + propertyArea +
+                ", propertyPrice=" + propertyPrice +
+                ", propertyRooms=" + propertyRooms +
+                ", propertyBathrooms=" + propertyBathrooms +
+                ", propertyDescription='" + propertyDescription + '\'' +
+                ", propertyAdmin=" + propertyAdmin +
+                ", isAvailableForRent=" + isAvailableForRent +
+                ", isAvailableForSale=" + isAvailableForSale +
+                '}';
     }
 }
