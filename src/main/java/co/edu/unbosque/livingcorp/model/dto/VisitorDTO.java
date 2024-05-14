@@ -10,7 +10,9 @@ public class VisitorDTO {
     private LocalDateTime appointmentDateTime;
     private PropertyDTO propertyId;
 
-    public VisitorDTO() {}
+    public VisitorDTO() {
+        propertyId = new PropertyDTO();
+    }
 
     public VisitorDTO(int appointmentId, String visitorName, String advisorName, LocalDateTime appointmentDateTime, PropertyDTO propertyId) {
         this.appointmentId = appointmentId;

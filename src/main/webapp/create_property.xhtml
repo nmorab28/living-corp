@@ -298,9 +298,9 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
             <div class="input-box">
-                <p:outputLabel for="publicacion" value="Administrador" />
-                <p:selectOneMenu id="publicacion" value="#{propertyBean.property.propertyAdmin.userName}" required="true">
-                    <f:selectItem itemLabel="-- Seleccione una publicación --" itemValue="" />
+                <p:outputLabel for="admin" value="Administrador" />
+                <p:selectOneMenu id="admin" value="#{propertyBean.property.propertyAdmin.userName}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione un administrador --" itemValue="" />
                     <f:selectItems value="#{propertyBean.selectedAdmins}" />
                 </p:selectOneMenu>
                 <i class="fa-solid fa-pen-to-square"></i>
