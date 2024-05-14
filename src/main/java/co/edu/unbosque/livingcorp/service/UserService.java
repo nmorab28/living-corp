@@ -42,7 +42,7 @@ public class UserService implements Serializable {
         user.setLoginAttempts(0);
         user.setLastLogin(LocalDateTime.now());
         user.setBlocked(false);
-        user.setPropertyAdmin(true);
+        user.setPropertyAdmin(false);
         user.setResidentPropertyOwner(false);
         return mp.map(userDAO.save(mp.map(user, User.class)), UserDTO.class);
     }

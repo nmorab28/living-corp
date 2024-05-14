@@ -24,7 +24,7 @@
         body {
             min-height: 100vh;
             flex-wrap: wrap;
-            background: url("resources/demo/img/background/img_2.png") no-repeat;
+            background: url("resources/demo/img/background/background.png") no-repeat;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -160,7 +160,6 @@
                 margin: 4px;
             }
         }
-
     </style>
 </h:head>
 <h:body>
@@ -174,20 +173,74 @@
         </nav>
 
     </header>
-    <!--::::contenido ::::::-->
 
 
+    <p:growl id="growl" showDetail="true" />
+    <!-- Contenido -->
+    <h:form id="searchedProperties">
+        <p:dataGrid value="#{propertyTableBean.properties}" var="property" columns="3">
+            <p:card style="width: 25em">
+                <f:facet name="header">
+                    <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
+                </f:facet>
+                <f:facet name="title">
+                    <h:outputText value="Propiedad: #{property.propertyName}" />
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Ciudad: #{property.propertyCity}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Direccion: #{property.propertyAddress}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Área: #{property.propertyArea}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Precio: #{property.propertyPrice}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Habitaciones: #{property.propertyRooms}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Baños: #{property.propertyBathrooms}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Descripción: #{property.propertyDescription}" />
+                </f:facet>
+                <f:facet name="footer">
+                    <p:commandButton value="Agendar Cita" update="appointmentDialog" oncomplete="PF('appointmentDialog').show()" action="#{propertyTableBean.visitor.setPropertyId(property)}" />
+                </f:facet>
+            </p:card>
+        </p:dataGrid>
+    </h:form>
 
-
-
-
-
-
-
-
-
-
-
+    <p:dialog id="appointmentDialog" widgetVar="appointmentDialog" modal="true" resizable="false" header="Agendar Cita">
+        <h:form>
+            <div class="input-box">
+                <p:inputText id="visitorName" placeholder="Nombre" value="#{propertyTableBean.visitor.visitorName}" required="true"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <p:selectOneMenu id="asesor" value="#{propertyTableBean.visitor.advisorName}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione un Asesor --" itemValue=""/>
+                    <f:selectItems value="#{propertyTableBean.advisers}"/>
+                </p:selectOneMenu>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <p:calendar id="appointmentDatetime" placeholder="Fecha y Hora" pattern="dd/MM/yyyy HH:mm" mask="true"
+                            locale="es" navigator="true" value="#{propertyTableBean.visitor.appointmentDateTime}" required="true"/>
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <p:commandButton value="Agendar" action="#{propertyTableBean.createAppointment}" update="growl" oncomplete="PF('appointmentDialog').hide()" />
+        </h:form>
+    </p:dialog>
 
 
     <!--::::Pie de Pagina::::::-->

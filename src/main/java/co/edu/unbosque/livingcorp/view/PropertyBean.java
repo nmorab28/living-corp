@@ -50,7 +50,7 @@ public class PropertyBean implements Serializable {
         }
     }
 
-    public void loadAdmins(){
+    private void loadAdmins(){
         selectedAdmins = new ArrayList<String>();
         userService.showAdmins().forEach(admin -> selectedAdmins.add(admin.getUserName()));
     }
