@@ -47,6 +47,21 @@ public class UserService implements Serializable {
         return mp.map(userDAO.save(mp.map(user, User.class)), UserDTO.class);
     }
 
+    public UserDTO signUpAdmin(UserDTO user) throws RepeatedObjectException, InvalidPasswordException {
+        try {
+            String hashedPassword = hashPassword(user.getUserPassword());
+            user.setUserPassword(hashedPassword);
+        } catch (NoSuchAlgorithmException e) {
+            throw new InvalidPasswordException("Contraseña invalida");
+        }
+        user.setLoginAttempts(0);
+        user.setLastLogin(LocalDateTime.now());
+        user.setBlocked(false);
+        user.setPropertyAdmin(true);
+        user.setResidentPropertyOwner(false);
+        return mp.map(userDAO.save(mp.map(user, User.class)), UserDTO.class);
+    }
+
     public boolean logInUser(UserDTO user) throws ObjectNotFoundException, BlockedUserException, InvalidPasswordException {
         UserDTO verifiedUser = mp.map(userDAO.find(user.getUserName()), UserDTO.class);
         if(verifiedUser != null){

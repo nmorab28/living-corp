@@ -17,6 +17,7 @@ public class PropertyDTO {
     private boolean isAvailableForRent;
     private boolean isAvailableForSale;
     private List<ResidentDTO> residents;
+    private List<PropertyResourceDTO> propertyResource;
 
     public PropertyDTO() {
         propertyAdmin = new UserDTO();
@@ -51,6 +52,23 @@ public class PropertyDTO {
         this.isAvailableForRent = isAvailableForRent;
         this.isAvailableForSale = isAvailableForSale;
         this.residents = residents;
+    }
+
+    public PropertyDTO(int propertyId, String propertyName, String propertyCity, String propertyAddress, int propertyArea, double propertyPrice, int propertyRooms, int propertyBathrooms, String propertyDescription, UserDTO propertyAdmin, boolean isAvailableForRent, boolean isAvailableForSale, List<ResidentDTO> residents, List<PropertyResourceDTO> propertyResource) {
+        this.propertyId = propertyId;
+        this.propertyName = propertyName;
+        this.propertyCity = propertyCity;
+        this.propertyAddress = propertyAddress;
+        this.propertyArea = propertyArea;
+        this.propertyPrice = propertyPrice;
+        this.propertyRooms = propertyRooms;
+        this.propertyBathrooms = propertyBathrooms;
+        this.propertyDescription = propertyDescription;
+        this.propertyAdmin = propertyAdmin;
+        this.isAvailableForRent = isAvailableForRent;
+        this.isAvailableForSale = isAvailableForSale;
+        this.residents = residents;
+        this.propertyResource = propertyResource;
     }
 
     public int getPropertyId() {
@@ -155,6 +173,14 @@ public class PropertyDTO {
 
     public void setResidents(List<ResidentDTO> residents) {
         this.residents = residents;
+    }
+
+    public List<PropertyResourceDTO> getPropertyResource() {
+        return propertyResource;
+    }
+
+    public void setPropertyResource(List<PropertyResourceDTO> propertyResource) {
+        this.propertyResource = propertyResource;
     }
 
     @Override

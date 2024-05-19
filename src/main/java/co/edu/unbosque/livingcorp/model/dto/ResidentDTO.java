@@ -7,7 +7,10 @@ public class ResidentDTO {
     private UserDTO userName;
     private boolean isOwner;
 
-    public ResidentDTO() {}
+    public ResidentDTO() {
+        propertyId = new PropertyDTO();
+        userName = new UserDTO();
+    }
 
     public ResidentDTO(int residentId, PropertyDTO propertyId, UserDTO userName, boolean isOwner) {
         this.residentId = residentId;

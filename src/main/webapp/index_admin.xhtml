@@ -161,14 +161,121 @@
     <header class="header">
         <a href="index_admin.xhtml"  class="logo">Living Corp</a>
         <nav class="navbar">
+            <a href="create_client.xhtml" >Registrar Cliente</a>
             <a href="create_property.xhtml" >Crear Inmueble</a>
+            <a href="create_resource.xhtml" >Crear Recurso</a>
             <a href="management_properety.xhtml" >Gestion de inmuebles</a>
             <h:form>
             <p:commandButton value="Cerrar Sesión" action="#{userBean.closeSession()}" styleClass="nav-button" icon="fa fa-sign-out-alt"/>
             </h:form>
         </nav>
-
     </header>
+
+    <p:growl id="growl" showDetail="true" />
+    <!-- Contenido -->
+    <h:form id="managedProperties">
+        <p:dataGrid value="#{menuAdminBean.properties}" var="propertyAdmin" columns="3">
+            <p:card style="width: 25em">
+                <f:facet name="header">
+                    <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
+                </f:facet>
+                <f:facet name="title">
+                    <h:outputText value="Propiedad: #{propertyAdmin.propertyName}" />
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Ciudad: #{propertyAdmin.propertyCity}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Direccion: #{propertyAdmin.propertyAddress}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Área: #{propertyAdmin.propertyArea}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Precio: #{propertyAdmin.propertyPrice}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Habitaciones: #{propertyAdmin.propertyRooms}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Baños: #{propertyAdmin.propertyBathrooms}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Descripción: #{propertyAdmin.propertyDescription}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Disponible para Renta: #{propertyAdmin.availableForRent}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="subtitle">
+                    <h:outputText value="Disponible para Venta: #{propertyAdmin.availableForSale}" />
+                    <br/>
+                </f:facet>
+                <f:facet name="footer">
+                    <p:splitButton value="Gestionar" icon="pi-wrench" action="#{menuAdminBean.resident.setPropertyId(propertyAdmin)}">
+                        <p:menuitem value="Asignar Residencia" icon="pi-user-plus" update="residenceDialog" oncomplete="PF('residenceDialog').show()" action="#{menuAdminBean.resident.setPropertyId(propertyAdmin)}" />
+                        <p:menuitem value="Gestionar Recursos" icon="pi-user-plus" update="propResourceDialog" oncomplete="PF('propResourceDialog').show()" action="#{menuAdminBean.propResource.setProId(propertyAdmin)}" />
+                    </p:splitButton>
+                </f:facet>
+            </p:card>
+        </p:dataGrid>
+    </h:form>
+
+    <p:dialog id="residenceDialog" widgetVar="residenceDialog" modal="true" resizable="false" header="Gestionar Residente">
+        <h:form>
+            <div class="input-box">
+                <p:selectOneMenu id="user" value="#{menuAdminBean.resident.userName.userName}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione un Usuario --" itemValue=""/>
+                    <f:selectItems value="#{menuAdminBean.availableUsers}"/>
+                </p:selectOneMenu>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+            <p:outputLabel for="isOwner" value="Propieratio" />
+            <p:selectBooleanCheckbox id="isOwner" value="#{menuAdminBean.resident.owner}"/>
+            </div>
+            <p:commandButton value="Asignar Residencia" action="#{menuAdminBean.assingResidence()}" update="growl" oncomplete="PF('residenceDialog').hide()" />
+        </h:form>
+    </p:dialog>
+
+    <p:dialog id="propResourceDialog" widgetVar="propResourceDialog" modal="true" resizable="false" header="Gestionar Recurso de la Propiedad">
+        <h:form>
+            <div class="input-box">
+                <p:selectOneMenu id="resource" value="#{menuAdminBean.resourceSelected}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione un Recurso --" itemValue=""/>
+                    <f:selectItems value="#{menuAdminBean.availableResources}"/>
+                </p:selectOneMenu>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <p:inputText id="minPrice" placeholder="Precio Minimo" value="#{menuAdminBean.propResource.minPrice}" required="true"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <p:inputText id="minTime" placeholder="Timpo Minimo (Horas)" value="#{menuAdminBean.propResource.minTimeH}" required="true"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <p:inputText id="capacity" placeholder="Capacidad" value="#{menuAdminBean.propResource.capacity}" required="true"/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <p:selectOneMenu id="adminEmail" value="#{menuAdminBean.propResource.bookEmail}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione un Correo --" itemValue=""/>
+                    <f:selectItems value="#{menuAdminBean.adminsEmail}"/>
+                </p:selectOneMenu>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <p:commandButton value="Asignar Recurso" action="#{menuAdminBean.assingResourceToProperty()}" update="growl" oncomplete="PF('propResourceDialog').hide()" />
+        </h:form>
+    </p:dialog>
 
 
 

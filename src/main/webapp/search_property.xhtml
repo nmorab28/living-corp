@@ -9,6 +9,43 @@
     <meta charset="utf-8" />
     <title>USER JSF</title>
     <style>
+        .appointment-dialog {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-box input, .input-box .ui-selectonemenu {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .appointment-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .appointment-button:hover {
+            background-color: #45a049;
+        }
+
         .centered-heading {
             text-align: center;
             color: #2C3E50; /* A dark blue shade */
@@ -177,50 +214,52 @@
 
     <p:growl id="growl" showDetail="true" />
     <!-- Contenido -->
-    <h:form id="searchedProperties">
-        <p:dataGrid value="#{propertyTableBean.properties}" var="property" columns="3">
-            <p:card style="width: 25em">
-                <f:facet name="header">
-                    <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
-                </f:facet>
-                <f:facet name="title">
-                    <h:outputText value="Propiedad: #{property.propertyName}" />
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Ciudad: #{property.propertyCity}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Direccion: #{property.propertyAddress}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Área: #{property.propertyArea}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Precio: #{property.propertyPrice}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Habitaciones: #{property.propertyRooms}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Baños: #{property.propertyBathrooms}" />
-                    <br/>
-                </f:facet>
-                <f:facet name="subtitle">
-                    <h:outputText value="Descripción: #{property.propertyDescription}" />
-                </f:facet>
-                <f:facet name="footer">
-                    <p:commandButton value="Agendar Cita" update="appointmentDialog" oncomplete="PF('appointmentDialog').show()" action="#{propertyTableBean.visitor.setPropertyId(property)}" />
-                </f:facet>
-            </p:card>
-        </p:dataGrid>
-    </h:form>
+    <div style="margin-top: 100px; background-color: rgba(255, 255, 255, 0.5);">
+        <h:form id="searchedProperties">
+            <p:dataGrid value="#{propertyTableBean.properties}" var="property" columns="3">
+                <p:card style="width: 25em">
+                    <f:facet name="header">
+                        <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
+                    </f:facet>
+                    <f:facet name="title">
+                        <h:outputText value="Propiedad: #{property.propertyName}" />
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Ciudad: #{property.propertyCity}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Direccion: #{property.propertyAddress}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Área: #{property.propertyArea}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Precio: #{property.propertyPrice}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Habitaciones: #{property.propertyRooms}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Baños: #{property.propertyBathrooms}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Descripción: #{property.propertyDescription}" />
+                    </f:facet>
+                    <f:facet name="footer">
+                        <p:commandButton value="Agendar Cita" update="appointmentDialog" oncomplete="PF('appointmentDialog').show()" action="#{propertyTableBean.visitor.setPropertyId(property)}" />
+                    </f:facet>
+                </p:card>
+            </p:dataGrid>
+        </h:form>
+    </div>
 
-    <p:dialog id="appointmentDialog" widgetVar="appointmentDialog" modal="true" resizable="false" header="Agendar Cita">
+    <p:dialog id="appointmentDialog" widgetVar="appointmentDialog" modal="true" resizable="false" header="Agendar Cita" styleClass="appointment-dialog">
         <h:form>
             <div class="input-box">
                 <p:inputText id="visitorName" placeholder="Nombre" value="#{propertyTableBean.visitor.visitorName}" required="true"/>
@@ -238,7 +277,7 @@
                             locale="es" navigator="true" value="#{propertyTableBean.visitor.appointmentDateTime}" required="true"/>
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
-            <p:commandButton value="Agendar" action="#{propertyTableBean.createAppointment}" update="growl" oncomplete="PF('appointmentDialog').hide()" />
+            <p:commandButton value="Agendar" action="#{propertyTableBean.createAppointment}" update="growl" oncomplete="PF('appointmentDialog').hide()" styleClass="appointment-button" />
         </h:form>
     </p:dialog>
 

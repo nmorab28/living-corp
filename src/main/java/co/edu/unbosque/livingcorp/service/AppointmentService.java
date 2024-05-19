@@ -25,9 +25,7 @@ public class AppointmentService {
     }
 
     public VisitorDTO createAppointment(VisitorDTO visitor) throws RepeatedObjectException {
-        List<Visitor> existingVisits = visitorDAO.findAll();
-
-        boolean appointmentExists = existingVisits.stream()
+        boolean appointmentExists = visitorDAO.findAll().stream()
                 .anyMatch(existingVisit -> existingVisit.getPropertyId().getPropertyId()== visitor.getPropertyId().getPropertyId() &&
                         existingVisit.getAppointmentDateTime().isEqual(visitor.getAppointmentDateTime()) &&
                         existingVisit.getAdvisorName().equals(visitor.getAdvisorName()));

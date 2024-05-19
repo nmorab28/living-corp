@@ -23,6 +23,8 @@ public class PropertyResourceDTO {
     }
 
     public PropertyResourceDTO() {
+        resId = new ResourceDTO();
+        proId = new PropertyDTO();
     }
 
     public int getProResId() {

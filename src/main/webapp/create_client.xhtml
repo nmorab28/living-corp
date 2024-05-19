@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+
 <h:head>
     <style>
         body {
@@ -23,7 +24,7 @@
             border: 1px solid black;
             width: 400px;
             height: 500px;
-            background: url("resources/demo/img/login_or_create/login.png");
+            background: url("resources/demo/img/login_or_create/crear.png");
             color: white;
             border-radius: 20px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.75);
@@ -79,24 +80,32 @@
             color: white;
         }
     </style>
-
-    <meta charset="utf-8"/>
-    <title>USER JSF</title>
 </h:head>
+
 
 <h:body>
     <div class="login">
         <h:form>
-            <h1>LOGIN</h1>
+            <h1>Registra un Nuevo Cliente</h1>
 
             <p:outputLabel for="username" value="Username"/>
-            <p:inputText id="username" value="#{userBean.user.userName}" styleClass="inputText" required="true"/>
+            <p:inputText id="username" value="#{userBean.user.userName}" type="text" required="true"
+                         requiredMessage="El nombre de usuario es obligatorio." maxlength="10" styleClass="inputText"/>
+
+            <p:outputLabel for="email" value="Email"/>
+            <p:inputText id="email" value="#{userBean.user.userEmail}" required="true"
+                         type="email" requiredMessage="El correo electrónico es obligatorio." validatorMessage="Correo no válido"
+                         styleClass="inputText">
+                <f:validateRegex pattern="^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}$"/>
+            </p:inputText>
 
             <p:outputLabel for="password" value="Password"/>
-            <p:password id="password" value="#{userBean.user.userPassword}" feedback="false" styleClass="inputText" required="true"/>
+            <p:password id="password" value="#{userBean.user.userPassword}" type="password" required="true"
+                        requiredMessage="La contraseña es obligatoria." feedback="true" maxlength="10" styleClass="inputText"/>
 
-            <p:commandButton value="Login" action="#{userBean.logIn()}" styleClass="login-button" update="@form"/>
+            <p:commandButton value="Registrar" action="#{userBean.signUpUser()}" update="@form" styleClass="login-button"/>
         </h:form>
     </div>
 </h:body>
+
 </html>

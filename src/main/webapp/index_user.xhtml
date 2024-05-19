@@ -9,6 +9,38 @@
     <meta charset="utf-8" />
     <title>USER JSF</title>
     <style>
+        .booking-dialog {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .booking-form .input-box {
+            margin-bottom: 15px;
+        }
+
+        .calendar-input .ui-inputfield, .ui-calendar {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .pay-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .pay-button:hover {
+            background-color: #45a049;
+        }
+
         .centered-heading {
             text-align: center;
             color: #2C3E50; /* A dark blue shade */
@@ -24,7 +56,7 @@
         body {
             min-height: 100vh;
             flex-wrap: wrap;
-            background: url("resources/demo/img/background/img_2.png") no-repeat;
+            background: url("resources/demo/img/background/background.png") no-repeat;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -167,9 +199,8 @@
 
     <!--::::nav bar::::::-->
     <header class="header">
-        <a href="index_user.xhtml"  class="logo">Living Corp User</a>
+        <a href="index_user.xhtml"  class="logo">Living Corp Partner</a>
         <nav class="navbar">
-            <a href="search_property.xhtml" >Mira apartamentos</a>
             <a href="#" >Contrata un servicio</a>
             <h:form>
                 <p:commandButton value="Cerrar Sesión" action="#{userBean.closeSession()}" styleClass="nav-button" icon="fa fa-sign-out-alt"/>
@@ -177,21 +208,76 @@
         </nav>
 
     </header>
+
+    <p:growl id="growl" showDetail="true" />
+    <!-- Contenido -->
+    <div style="margin-top: 100px; background-color: rgba(255, 255, 255, 0.5);">
+        <h:form id="userProperties">
+            <p:dataGrid value="#{menuClientBean.residentPropertyResources}" var="propertyResident" columns="3">
+                <p:card style="width: 25em">
+                    <f:facet name="header">
+                        <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
+                    </f:facet>
+                    <f:facet name="title">
+                        <h:outputText value="#{propertyResident.resId.resourceType} de #{propertyResident.proId.propertyName}" />
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Precio minimo: #{propertyResident.minPrice}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Tiempo minimo: #{propertyResident.minTimeH}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Capacidad maxima: #{propertyResident.capacity}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Correo Responsable: #{propertyResident.bookEmail}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Descripción: #{propertyResident.resId.resourceDescription}" />
+                        <br/>
+                        <br/>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <h:outputText value="Disponible: #{propertyResident.availabily}" />
+                        <br/>
+                    </f:facet>
+                    <f:facet name="footer">
+                        <p:commandButton value="Reservar" action="#{menuClientBean.resourceBooking.setPropertyResourceId(propertyResident)}" update="growl" oncomplete="PF('bookingResourceDialog').show()" />
+                    </f:facet>
+                </p:card>
+            </p:dataGrid>
+        </h:form>
+    </div>
+
+    <p:dialog id="bookingResourceDialog" widgetVar="bookingResourceDialog" modal="true" resizable="false" header="Reservar Recurso" styleClass="booking-dialog">
+        <h:form>
+            <div class="booking-form">
+                <div class="input-box">
+                    <label for="bookingDatetime">Fecha y Hora de la Reserva</label>
+                    <p:calendar id="bookingDatetime" placeholder="Seleccione la fecha y hora" pattern="dd/MM/yyyy HH:mm" mask="true"
+                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingDateTime}" required="true" styleClass="calendar-input"/>
+                </div>
+                <div class="input-box">
+                    <label for="bookingStartDate">Fecha y Hora de Inicio</label>
+                    <p:calendar id="bookingStartDate" placeholder="Seleccione la fecha y hora de inicio" pattern="dd/MM/yyyy HH:mm" mask="true"
+                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingStartDate}" required="true" styleClass="calendar-input"/>
+                </div>
+                <div class="input-box">
+                    <label for="bookingEndDate">Fecha y Hora de Fin</label>
+                    <p:calendar id="bookingEndDate" placeholder="Seleccione la fecha y hora de fin" pattern="dd/MM/yyyy HH:mm" mask="true"
+                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingEndDate}" required="true" styleClass="calendar-input"/>
+                </div>
+                <p:commandButton value="Ir a Pagar" action="#{menuClientBean.goToPay()}" update="growl" oncomplete="PF('bookingResourceDialog').hide()" styleClass="pay-button" />
+            </div>
+        </h:form>
+    </p:dialog>
+
     <!--::::contenido ::::::-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!--::::Pie de Pagina::::::-->
     <footer>

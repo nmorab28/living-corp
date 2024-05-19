@@ -24,7 +24,10 @@ public class ResourceBookingDTO {
         this.paymentComplete = paymentComplete;
     }
 
-    public ResourceBookingDTO() {}
+    public ResourceBookingDTO() {
+        userName = new UserDTO();
+        propertyResourceId = new PropertyResourceDTO();
+    }
 
     public int getBookingId() {
         return bookingId;

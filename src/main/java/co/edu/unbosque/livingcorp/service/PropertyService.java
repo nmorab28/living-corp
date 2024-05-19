@@ -32,14 +32,11 @@ public class PropertyService {
         return mp.map(propertyDAO.save(mp.map(property, Property.class)), PropertyDTO.class);
     }
 
-    public void addResidentToProperty(UserDTO user, PropertyDTO property, ResidentDTO resident) throws ObjectNotFoundException {
-        if(user.getUserName().equals(resident.getUserName().getUserName())){
-            property.getResidents().add(resident);
-            List<Resident> residents = property.getResidents().stream().map(entity -> mp.map(entity, Resident.class)).collect(Collectors.toList());
-            Property persist = mp.map(property, Property.class);
-            persist.setResidents(residents);
-            propertyDAO.update(persist);
-        }
+    public void addResidentToProperty(ResidentDTO resident) throws ObjectNotFoundException {
+        PropertyDTO property = resident.getPropertyId();
+        property.setAvailableForRent(false);
+        property.setAvailableForSale(false);
+        propertyDAO.update(mp.map(property, Property.class));
     }
 
     public PropertyDTO searchProperty(int id) throws ObjectNotFoundException {
@@ -48,6 +45,10 @@ public class PropertyService {
 
     public List<PropertyDTO> showProperties(){
         return propertyDAO.findAll().stream().map(property -> mp.map(property, PropertyDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<PropertyDTO> showAvailableProperties(){
+        return propertyDAO.findAll().stream().filter(property -> property.isAvailableForRent() || property.isAvailableForSale()).map(property -> mp.map(property, PropertyDTO.class)).collect(Collectors.toList());
     }
 
 }

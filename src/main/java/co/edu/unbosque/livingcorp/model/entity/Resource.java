@@ -4,7 +4,7 @@ package co.edu.unbosque.livingcorp.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "RESOURCES")
 public class Resource {
 
     @Id
