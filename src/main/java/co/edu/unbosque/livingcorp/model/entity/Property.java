@@ -50,6 +50,9 @@ public class Property {
     @OneToMany(mappedBy = "propertyId", fetch = FetchType.LAZY)
     private List<Resident> residents;
 
+    @OneToMany(mappedBy = "proId", fetch = FetchType.LAZY)
+    private List<PropertyResource> propertyResources;
+
     public Property() {
     }
 
@@ -82,6 +85,23 @@ public class Property {
         this.isAvailableForRent = isAvailableForRent;
         this.isAvailableForSale = isAvailableForSale;
         this.residents = residents;
+    }
+
+    public Property(int propertyId, String propertyName, String propertyCity, String propertyAddress, int propertyArea, double propertyPrice, int propertyRooms, int propertyBathrooms, String propertyDescription, User propertyAdmin, boolean isAvailableForRent, boolean isAvailableForSale, List<Resident> residents, List<PropertyResource> propertyResources) {
+        this.propertyId = propertyId;
+        this.propertyName = propertyName;
+        this.propertyCity = propertyCity;
+        this.propertyAddress = propertyAddress;
+        this.propertyArea = propertyArea;
+        this.propertyPrice = propertyPrice;
+        this.propertyRooms = propertyRooms;
+        this.propertyBathrooms = propertyBathrooms;
+        this.propertyDescription = propertyDescription;
+        this.propertyAdmin = propertyAdmin;
+        this.isAvailableForRent = isAvailableForRent;
+        this.isAvailableForSale = isAvailableForSale;
+        this.residents = residents;
+        this.propertyResources = propertyResources;
     }
 
     public int getPropertyId() {
@@ -186,5 +206,13 @@ public class Property {
 
     public void setResidents(List<Resident> residents) {
         this.residents = residents;
+    }
+
+    public List<PropertyResource> getPropertyResources() {
+        return propertyResources;
+    }
+
+    public void setPropertyResources(List<PropertyResource> propertyResources) {
+        this.propertyResources = propertyResources;
     }
 }

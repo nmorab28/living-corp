@@ -342,14 +342,9 @@
 
     </header>
     <!--::::contenido ::::::-->
-
-
-
-
+    <p:growl id="growl" showDetail="true" />
     <div class="container">
-
         <div class="card-container">
-
             <div class="front">
                 <div class="image">
                     <img src="image/chip.png" alt=""/>
@@ -370,7 +365,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="back">
                 <div class="stripe"></div>
                 <div class="box">
@@ -379,72 +373,57 @@
                     <img src="image/visa.png" alt=""/>
                 </div>
             </div>
-
         </div>
-
-        <form action="">
+        <h:form>
             <div class="inputBox">
                 <span>card number</span>
-                <input type="text" maxlength="16" class="card-number-input"/>
+                <p:inputText id="cardNumber" value="#{menuClientBean.payment}" maxlength="16" styleClass="card-number-input"/>
             </div>
             <div class="inputBox">
                 <span>card holder</span>
-                <input type="text" class="card-holder-input"/>
+                <p:inputText id="cardHolder" value="#{menuClientBean.payment}" styleClass="card-holder-input"/>
             </div>
             <div class="flexbox">
                 <div class="inputBox">
                     <span>expiration mm</span>
-                    <select name="" id="payment_month" class="month-input">
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
+                    <p:selectOneMenu id="paymentMonth" value="#{menuClientBean.payment}" styleClass="month-input">
+                        <f:selectItem itemLabel="01" itemValue="01" />
+                        <f:selectItem itemLabel="02" itemValue="02" />
+                        <f:selectItem itemLabel="03" itemValue="03" />
+                        <f:selectItem itemLabel="04" itemValue="04" />
+                        <f:selectItem itemLabel="05" itemValue="05" />
+                        <f:selectItem itemLabel="06" itemValue="06" />
+                        <f:selectItem itemLabel="07" itemValue="07" />
+                        <f:selectItem itemLabel="08" itemValue="08" />
+                        <f:selectItem itemLabel="09" itemValue="09" />
+                        <f:selectItem itemLabel="10" itemValue="10" />
+                        <f:selectItem itemLabel="11" itemValue="11" />
+                        <f:selectItem itemLabel="12" itemValue="12" />
+                    </p:selectOneMenu>
                 </div>
                 <div class="inputBox">
                     <span>expiration yy</span>
-                    <select name="" id="" class="year-input">
-
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                        <option value="2029">2029</option>
-                        <option value="2030">2030</option>
-                    </select>
+                    <p:selectOneMenu id="paymentYear" value="#{menuClientBean.payment}" styleClass="year-input">
+                        <f:selectItem itemLabel="2021" itemValue="2021" />
+                        <f:selectItem itemLabel="2022" itemValue="2022" />
+                        <f:selectItem itemLabel="2023" itemValue="2023" />
+                        <f:selectItem itemLabel="2024" itemValue="2024" />
+                        <f:selectItem itemLabel="2025" itemValue="2025" />
+                        <f:selectItem itemLabel="2026" itemValue="2026" />
+                        <f:selectItem itemLabel="2027" itemValue="2027" />
+                        <f:selectItem itemLabel="2028" itemValue="2028" />
+                        <f:selectItem itemLabel="2029" itemValue="2029" />
+                        <f:selectItem itemLabel="2030" itemValue="2030" />
+                    </p:selectOneMenu>
                 </div>
                 <div class="inputBox">
                     <span>cvv</span>
-                    <input type="text" maxlength="4" class="cvv-input"/>
+                    <p:inputText id="cvv" value="#{menuClientBean.payment}" placeholder="cvv" maxlength="4" styleClass="cvv-input"/>
                 </div>
             </div>
-            <input type="submit" value="submit" class="submit-btn"/>
-        </form>
-
+            <p:commandButton value="Pagar" action="#{menuClientBean.reserveResource()}" class="submit-btn"/>
+        </h:form>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
     <!--::::Pie de Pagina::::::-->
     <footer>

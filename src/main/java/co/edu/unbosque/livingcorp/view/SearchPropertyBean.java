@@ -34,7 +34,7 @@ public class SearchPropertyBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        properties = propertyService.showProperties();
+        properties = propertyService.showAvailableProperties();
         loadAdvisers();
         visitor = new VisitorDTO();
     }

@@ -1,7 +1,6 @@
 package co.edu.unbosque.livingcorp.view;
 
 import co.edu.unbosque.livingcorp.model.dto.PropertyDTO;
-import co.edu.unbosque.livingcorp.model.dto.UserDTO;
 import co.edu.unbosque.livingcorp.model.exception.ObjectNotFoundException;
 import co.edu.unbosque.livingcorp.model.exception.RepeatedObjectException;
 import co.edu.unbosque.livingcorp.service.PropertyService;

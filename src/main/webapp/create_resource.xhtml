@@ -265,61 +265,23 @@
                 <p>Crea un inmueble para venta o renta,</p>
                 <p>aplican terminos y cindiciones </p>
             </div>
-
         </div>
+
         <h:form>
             <div class="input-box">
-                <p:inputText id="propertyName" placeholder="Nombre de la propiedad" value="#{propertyBean.property.propertyName}" required="true" requiredMessage="El nombre es obligatorio."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyCity" placeholder="Ciudad" value="#{propertyBean.property.propertyCity}" required="true" requiredMessage="La ciudad es obligatoria."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyAddress" placeholder="Dirección" value="#{propertyBean.property.propertyAddress}" required="true" requiredMessage="La dirección es obligatoria."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyArea" placeholder="Área" value="#{propertyBean.property.propertyArea}" required="true" requiredMessage="El área es obligatoria."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyPrice" placeholder="Precio" value="#{propertyBean.property.propertyPrice}" required="true" requiredMessage="El precio es obligatorio."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyRooms" placeholder="Habitaciones" value="#{propertyBean.property.propertyRooms}" required="true" requiredMessage="El número de habitaciones es obligatorio."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputText id="propertyBathrooms" placeholder="Baños" value="#{propertyBean.property.propertyBathrooms}" required="true" requiredMessage="El número de baños es obligatorio."/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="input-box">
-                <p:inputTextarea id="propertyDescription" placeholder="Descripción" value="#{propertyBean.property.propertyDescription}" required="true" requiredMessage="La descripción es obligatoria."/>
-                <i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <div class="input-box">
-                <p:selectOneMenu id="admin" value="#{propertyBean.property.propertyAdmin.userName}" required="true">
-                    <f:selectItem itemLabel="-- Seleccione un Administrador --" itemValue="" />
-                    <f:selectItems value="#{propertyBean.selectedAdmins}" />
+                <p:selectOneMenu id="type" value="#{createResourceBean.resource.resourceType}" required="true">
+                    <f:selectItem itemLabel="-- Seleccione el Tipo de Recurso --" itemValue="" />
+                    <f:selectItems value="#{createResourceBean.resourceType}" />
                 </p:selectOneMenu>
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
             <div class="input-box">
-                <p:outputLabel for="isAvailableForRent" value="Arriendo" />
-                <p:selectBooleanCheckbox id="isAvailableForRent" value="#{propertyBean.property.availableForRent}"/>
+                <p:inputText id="resourceDescription" placeholder="Descripción del recurso" value="#{createResourceBean.resource.resourceDescription}" required="true" requiredMessage="La descripción es obligatoria." maxlength="25"/>
                 <i class="fa-solid fa-user"></i>
             </div>
-            <div class="input-box">
-                <p:outputLabel for="isAvailableForSale" value="Venta" />
-                <p:selectBooleanCheckbox id="isAvailableForSale" value="#{propertyBean.property.availableForSale}"/>
-                <i class="fa-solid fa-user"></i>
-            </div>
-
-            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.createProperty()}" update="@form"/>
+            <p:commandButton value="Registrar Recurso" action="#{createResourceBean.createResource()}" update="growl"/>
         </h:form>
+        <p:growl id="growl" showDetail="true" />
     </div>
 
 </h:body>

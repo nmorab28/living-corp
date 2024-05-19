@@ -1,6 +1,9 @@
 package co.edu.unbosque.livingcorp.model.dto;
 
+import co.edu.unbosque.livingcorp.model.entity.Resident;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class UserDTO {
 
@@ -12,6 +15,7 @@ public class UserDTO {
     private boolean isBlocked;
     private boolean isPropertyAdmin;
     private boolean isResidentPropertyOwner;
+    private List<ResidentDTO> residents;
 
     public UserDTO() {}
 
@@ -24,6 +28,18 @@ public class UserDTO {
         this.isBlocked = isBlocked;
         this.isPropertyAdmin = isPropertyAdmin;
         this.isResidentPropertyOwner = isResidentPropertyOwner;
+    }
+
+    public UserDTO(String userName, String userEmail, String userPassword, LocalDateTime lastLogin, int loginAttempts, boolean isBlocked, boolean isPropertyAdmin, boolean isResidentPropertyOwner, List<ResidentDTO> residents) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.lastLogin = lastLogin;
+        this.loginAttempts = loginAttempts;
+        this.isBlocked = isBlocked;
+        this.isPropertyAdmin = isPropertyAdmin;
+        this.isResidentPropertyOwner = isResidentPropertyOwner;
+        this.residents = residents;
     }
 
     public String getUserName() {
@@ -88,5 +104,13 @@ public class UserDTO {
 
     public void setResidentPropertyOwner(boolean residentPropertyOwner) {
         isResidentPropertyOwner = residentPropertyOwner;
+    }
+
+    public List<ResidentDTO> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<ResidentDTO> residents) {
+        this.residents = residents;
     }
 }

@@ -24,7 +24,7 @@
             border: 1px solid black;
             width: 400px;
             height: 500px;
-            background: url("resources/demo/img/slider/login.png");
+            background: url("resources/demo/img/login_or_create/crear.png");
             color: white;
             border-radius: 20px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.75);
@@ -86,7 +86,7 @@
 <h:body>
     <div class="login">
         <h:form>
-            <h1>Create account</h1>
+            <h1>Creación de Admin</h1>
 
             <p:outputLabel for="username" value="Username"/>
             <p:inputText id="username" value="#{userBean.user.userName}" type="text" required="true"
@@ -103,7 +103,7 @@
             <p:password id="password" value="#{userBean.user.userPassword}" type="password" required="true"
                         requiredMessage="La contraseña es obligatoria." feedback="true" maxlength="10" styleClass="inputText"/>
 
-            <p:commandButton value="Registrar" action="#{userBean.signUp()}" update="@form" styleClass="login-button"/>
+            <p:commandButton value="Registrar" action="#{userBean.signUpAdmin()}" update="@form" styleClass="login-button"/>
         </h:form>
     </div>
 </h:body>

@@ -40,8 +40,7 @@ public class UserBean implements Serializable {
             if(userService.logInUser(user)){
                 user = userService.findUser(user.getUserName());
                 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-                session.setAttribute("userLogIn", user);
-                registeredUsers = userService.showUsers();
+                session.setAttribute("userName", user.getUserName());
                 return userService.redirect(user);
             }else{
                 return "login.xhtml";
@@ -55,9 +54,19 @@ public class UserBean implements Serializable {
         }
     }
 
-    public String signUp(){
+    public String signUpUser(){
         try {
             userService.signUpUser(user);
+        } catch (RepeatedObjectException e) {
+            return "error_404.xhtml";
+        } catch (InvalidPasswordException e) {
+            return "error_404.xhtml";
+        }
+        return "search_property.xhtml";
+    }
+    public String signUpAdmin(){
+        try {
+            userService.signUpAdmin(user);
         } catch (RepeatedObjectException e) {
             return "error_404.xhtml";
         } catch (InvalidPasswordException e) {

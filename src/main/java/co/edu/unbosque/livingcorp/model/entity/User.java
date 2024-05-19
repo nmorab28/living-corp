@@ -3,6 +3,7 @@ package co.edu.unbosque.livingcorp.model.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="WEB_USERS")
@@ -33,6 +34,9 @@ public class User {
     @Column (name = "IS_RESIDENT_PPRTY_OWNER")
     private boolean isResidentPropertyOwner;
 
+    @OneToMany(mappedBy = "userName", fetch = FetchType.LAZY)
+    private List<Resident> residents;
+
     public User() {}
 
     public User(String userName, String userEmail, String userPassword, LocalDateTime lastLogin, int loginAttempts, boolean isBlocked, boolean isPropertyAdmin, boolean isResidentPropertyOwner) {
@@ -44,6 +48,18 @@ public class User {
         this.isBlocked = isBlocked;
         this.isPropertyAdmin = isPropertyAdmin;
         this.isResidentPropertyOwner = isResidentPropertyOwner;
+    }
+
+    public User(String userName, String userEmail, String userPassword, LocalDateTime lastLogin, int loginAttempts, boolean isBlocked, boolean isPropertyAdmin, boolean isResidentPropertyOwner, List<Resident> residents) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.lastLogin = lastLogin;
+        this.loginAttempts = loginAttempts;
+        this.isBlocked = isBlocked;
+        this.isPropertyAdmin = isPropertyAdmin;
+        this.isResidentPropertyOwner = isResidentPropertyOwner;
+        this.residents = residents;
     }
 
     public String getUserName() {
@@ -108,5 +124,13 @@ public class User {
 
     public void setResidentPropertyOwner(boolean residentPropertyOwner) {
         isResidentPropertyOwner = residentPropertyOwner;
+    }
+
+    public List<Resident> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<Resident> residents) {
+        this.residents = residents;
     }
 }
