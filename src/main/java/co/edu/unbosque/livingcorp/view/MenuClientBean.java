@@ -97,8 +97,8 @@ public class MenuClientBean implements Serializable {
         if (resourceBooking != null) {
             try {
                 resourceBooking = resourceBookingService.payingForResource(resourceBooking);
+                resourceBooking = resourceBookingService.createResourceBooking(resourceBooking, user);
                 propertyResourceService.updatePropertyResource(resourceBooking.getPropertyResourceId());
-                resourceBookingService.createResourceBooking(resourceBooking, user);
                 emailService.sendResourceBookingNotification(user, resourceBooking);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Recurso Reservado"));
             } catch (RepeatedObjectException | NonpaymentException | PRInvalidRequirementsException e) {
