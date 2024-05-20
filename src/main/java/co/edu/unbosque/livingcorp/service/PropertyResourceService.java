@@ -54,7 +54,7 @@ public class PropertyResourceService {
         propResourceDAO.update(mp.map(propertyResource, PropertyResource.class));
     }
 
-    public int getResourceId(String characters) throws ObjectNotFoundException {
+    public int getSelecctedResourceId(String characters) throws ObjectNotFoundException {
         String chars[] = characters.split(" - ");
         if(!chars[0].isEmpty()){
             return Integer.parseInt(chars[0]);

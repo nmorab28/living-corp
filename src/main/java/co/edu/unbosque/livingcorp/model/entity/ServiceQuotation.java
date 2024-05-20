@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "SERVICE_RFQ")
-public class ServiceRFQ {
+public class ServiceQuotation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class ServiceRFQ {
     @Column(name = "REQUEST_DESCRIPTION")
     private String requestDescription;
 
-    public ServiceRFQ(int rfqId, LocalDateTime rfqDateTime, User userName, Property propertyId, ServiceProvider svcProviderId, String requestDescription) {
+    public ServiceQuotation(int rfqId, LocalDateTime rfqDateTime, User userName, Property propertyId, ServiceProvider svcProviderId, String requestDescription) {
         this.rfqId = rfqId;
         this.rfqDateTime = rfqDateTime;
         this.userName = userName;
@@ -40,7 +40,7 @@ public class ServiceRFQ {
         this.requestDescription = requestDescription;
     }
 
-    public ServiceRFQ() {
+    public ServiceQuotation() {
     }
 
     public int getRfqId() {

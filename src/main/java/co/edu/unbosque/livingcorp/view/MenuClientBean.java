@@ -65,7 +65,7 @@ public class MenuClientBean implements Serializable {
         }
     }
 
-    public void loadSession(){
+    private void loadSession(){
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         String userId = (String) session.getAttribute("userName");
         try {
@@ -84,10 +84,11 @@ public class MenuClientBean implements Serializable {
             resourceBooking = resourceBookingService.calculatePayment(resourceBooking);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("resourceBooking", resourceBooking);
+            return "payment.xhtml";
         } catch (PRInvalidRequirementsException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         }
-        return "payment.xhtml";
+        return "index_user.xhtml";
     }
 
     public String reserveResource(){

@@ -3,10 +3,7 @@ package co.edu.unbosque.livingcorp.service;
 import java.util.List;
 import java.util.Properties;
 
-import co.edu.unbosque.livingcorp.model.dto.PropertyResourceDTO;
-import co.edu.unbosque.livingcorp.model.dto.ResidentDTO;
-import co.edu.unbosque.livingcorp.model.dto.ResourceBookingDTO;
-import co.edu.unbosque.livingcorp.model.dto.UserDTO;
+import co.edu.unbosque.livingcorp.model.dto.*;
 import co.edu.unbosque.livingcorp.model.exception.IncompleteNotificationException;
 import jakarta.ejb.Stateless;
 import jakarta.mail.Message;
@@ -22,9 +19,9 @@ public class EmailService {
 
     public void sendNotification(String to, String subject, String content) throws IncompleteNotificationException {
 
-        String from = "nmorab@unbosque.edu.co";
-        final String username = "nmorab@unbosque.edu.co";
-        final String password = "vnea kahd dmjs baia";
+        String from = "inmobiliarialivingcorp@gmail.com";
+        final String username = "inmobiliarialivingcorp@gmail.com";
+        final String password = "fkif qtga fwex onki";
 
 
         String host = "smtp.gmail.com";
@@ -97,4 +94,58 @@ public class EmailService {
             sendNotification(to, subject, content);
         }
     }
+
+    public void sendQuotationNotificationToProvider(UserDTO user, ServiceQuotationDTO serviceQuotation) throws IncompleteNotificationException {
+        String to = serviceQuotation.getSvcProviderId().getProviderEmail();
+        String subject = "Solicitud de Cotización | Living Corp";
+
+        String content = "Estimados Proveedores,\n\n" +
+                "Por este medio, deseamos solicitar de manera formal una cotización para los servicios de " + serviceQuotation.getSvcProviderId().getServiceType() + ".\n\n" +
+                "Detalles de la solicitud de cotización:\n" +
+                "- Cliente: " + user.getUserName() + "\n" +
+                "- Propiedad: " + serviceQuotation.getPropertyId().getPropertyName() + "\n" +
+                "- Fecha y Hora de la solicitud: " + serviceQuotation.getRfqDateTime() + "\n" +
+                "- Descripción de la petición: " + serviceQuotation.getRequestDescription() + "\n\n" +
+                "Por favor, revisen esta solicitud y envíen su cotización correspondiente.\n\n" +
+                "Atentamente,\n\n" +
+                "Equipo de Soporte de Living Corp.";
+
+        sendNotification(to, subject, content);
+    }
+
+    public void sendQuotationNotificationToResident(UserDTO user, ServiceQuotationDTO serviceQuotation) throws IncompleteNotificationException {
+        String to = user.getUserEmail();
+        String subject = "Cotización del Servicio de " + serviceQuotation.getSvcProviderId().getServiceType() + " | Living Corp";
+
+        String content = "Estimado(a) " + user.getUserName() + ",\n\n" +
+                "Hemos recibido tu solicitud de cotización para el servicio de " + serviceQuotation.getSvcProviderId().getServiceType() + " en la propiedad " + serviceQuotation.getPropertyId().getPropertyName() + ".\n\n" +
+                "Detalles de la cotización:\n" +
+                "- Fecha y Hora de la solicitud: " + serviceQuotation.getRfqDateTime() + "\n" +
+                "- Descripción de la petición: " + serviceQuotation.getRequestDescription() + "\n" +
+                "- Costo estimado: $" + String.format("%.2f", serviceQuotation.getSvcProviderId().getServicePrice()) + "\n\n" +
+                "Te mantendremos informado(a) sobre el progreso de tu solicitud.\n\n" +
+                "Atentamente,\n\n" +
+                "Equipo de Soporte de Living Corp.";
+
+        sendNotification(to, subject, content);
+    }
+
+    public void sendServiceConfirmationToResident(UserDTO user, ServiceRequestDTO serviceRequest) throws IncompleteNotificationException {
+        String to = user.getUserEmail();
+        String subject = "Confirmación de Servicio | Living Corp";
+
+        String content = "Estimado(a) " + user.getUserName() + ",\n\n" +
+                "Nos complace informarte que tu solicitud de servicio ha sido confirmada con éxito para la propiedad " + serviceRequest.getPropertyId().getPropertyName() + ".\n\n" +
+                "Detalles de la solicitud de servicio:\n" +
+                "- Fecha y Hora de la solicitud: " + serviceRequest.getRqstDateTime() + "\n" +
+                "- Descripción de la petición: " + serviceRequest.getRequestDescription() + "\n" +
+                "- Proveedor seleccionado: " + serviceRequest.getSvcProviderId().getServiceDescription() + "\n" +
+                "- Fecha y Hora del servicio: " + serviceRequest.getSvcDateTime() + "\n\n" +
+                "Recibirás más información sobre el servicio próximamente.\n\n" +
+                "Atentamente,\n\n" +
+                "Equipo de Soporte de Living Corp.";
+
+        sendNotification(to, subject, content);
+    }
+
 }

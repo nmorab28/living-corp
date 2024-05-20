@@ -80,10 +80,12 @@
             color: white;
         }
     </style>
+    <f:event type="preRenderView" listener="#{userBean.verifySession()}" />
 </h:head>
 
 
 <h:body>
+    <p:growl id="growl" showDetail="true" />
     <div class="login">
         <h:form>
             <h1>Registra un Nuevo Cliente</h1>
@@ -103,7 +105,7 @@
             <p:password id="password" value="#{userBean.user.userPassword}" type="password" required="true"
                         requiredMessage="La contraseña es obligatoria." feedback="true" maxlength="10" styleClass="inputText"/>
 
-            <p:commandButton value="Registrar" action="#{userBean.signUpUser()}" update="@form" styleClass="login-button"/>
+            <p:commandButton value="Registrar" action="#{userBean.signUpUser()}" update="growl" styleClass="login-button"/>
         </h:form>
     </div>
 </h:body>

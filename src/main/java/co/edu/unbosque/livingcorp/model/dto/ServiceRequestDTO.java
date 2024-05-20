@@ -23,6 +23,8 @@ public class ServiceRequestDTO {
     }
 
     public ServiceRequestDTO() {
+        userName = new UserDTO();
+        propertyId = new PropertyDTO();
     }
 
     public int getRqstId() {

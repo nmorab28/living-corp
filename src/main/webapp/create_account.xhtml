@@ -80,13 +80,15 @@
             color: white;
         }
     </style>
+
 </h:head>
 
 
 <h:body>
+    <p:growl id="growl" showDetail="true" />
     <div class="login">
         <h:form>
-            <h1>Creación de Admin</h1>
+            <h1>Creación de Administrador</h1>
 
             <p:outputLabel for="username" value="Username"/>
             <p:inputText id="username" value="#{userBean.user.userName}" type="text" required="true"
@@ -103,7 +105,7 @@
             <p:password id="password" value="#{userBean.user.userPassword}" type="password" required="true"
                         requiredMessage="La contraseña es obligatoria." feedback="true" maxlength="10" styleClass="inputText"/>
 
-            <p:commandButton value="Registrar" action="#{userBean.signUpAdmin()}" update="@form" styleClass="login-button"/>
+            <p:commandButton value="Registrar" action="#{userBean.signUpAdmin()}" update="growl" styleClass="login-button"/>
         </h:form>
     </div>
 </h:body>
