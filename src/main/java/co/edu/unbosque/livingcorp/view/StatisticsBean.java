@@ -12,6 +12,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequestScoped
 public class StatisticsBean implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(StatisticsBean.class);
 
     @Inject
     private PropertyService propertyService;

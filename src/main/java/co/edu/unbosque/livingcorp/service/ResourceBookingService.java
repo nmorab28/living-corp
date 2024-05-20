@@ -52,7 +52,7 @@ public class ResourceBookingService {
         if (!isBookingInAdvance(resourceBooking)) {
             throw new PRInvalidRequirementsException("La reserva debe realizarse con un mínimo de tres (3) días de anticipación.");
         }
-        if (resourceBooking.getBookingStartDate().isBefore(resourceBooking.getBookingEndDate())) {
+        if (resourceBooking.getBookingStartDate().isAfter(resourceBooking.getBookingEndDate())) {
             throw new PRInvalidRequirementsException("La fecha de inicio de la reserva debe ser anterior a la fecha de finalización.");
         }
         if(!resourceBooking.getBookingDateTime().isEqual(resourceBooking.getBookingStartDate())){
