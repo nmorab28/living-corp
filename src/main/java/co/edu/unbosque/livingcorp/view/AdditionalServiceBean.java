@@ -12,6 +12,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.List;
 @ViewScoped
 public class AdditionalServiceBean implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(AdditionalServiceBean.class);
 
     @Inject
     private UserService userService;
