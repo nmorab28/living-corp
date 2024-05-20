@@ -2,7 +2,7 @@ package co.edu.unbosque.livingcorp.model.dto;
 
 import java.time.LocalDateTime;
 
-public class ServiceRFQDTO {
+public class ServiceQuotationDTO {
 
     private int rfqId;
     private LocalDateTime rfqDateTime;
@@ -11,7 +11,7 @@ public class ServiceRFQDTO {
     private ServiceProviderDTO svcProviderId;
     private String requestDescription;
 
-    public ServiceRFQDTO(int rfqId, LocalDateTime rfqDateTime, UserDTO userName, PropertyDTO propertyId, ServiceProviderDTO svcProviderId, String requestDescription) {
+    public ServiceQuotationDTO(int rfqId, LocalDateTime rfqDateTime, UserDTO userName, PropertyDTO propertyId, ServiceProviderDTO svcProviderId, String requestDescription) {
         this.rfqId = rfqId;
         this.rfqDateTime = rfqDateTime;
         this.userName = userName;
@@ -20,7 +20,9 @@ public class ServiceRFQDTO {
         this.requestDescription = requestDescription;
     }
 
-    public ServiceRFQDTO() {
+    public ServiceQuotationDTO() {
+        userName = new UserDTO();
+        propertyId = new PropertyDTO();
     }
 
     public int getRfqId() {

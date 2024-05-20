@@ -1,11 +1,18 @@
 package co.edu.unbosque.livingcorp.model.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ServiceProviderDTO {
 
+    @SerializedName("providerId")
     private int providerId;
+    @SerializedName("providerEmail")
     private String providerEmail;
+    @SerializedName("serviceDescription")
     private String serviceDescription;
+    @SerializedName("serviceType")
     private String serviceType;
+    @SerializedName("servicePrice")
     private double servicePrice;
 
     public ServiceProviderDTO(int providerId, String providerEmail, String serviceDescription, String serviceType, double servicePrice) {

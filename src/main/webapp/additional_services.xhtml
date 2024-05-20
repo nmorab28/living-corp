@@ -194,7 +194,6 @@
         }
 
     </style>
-    <f:event type="preRenderView" listener="#{userBean.verifySession()}" />
 </h:head>
 <h:body>
 
@@ -213,67 +212,70 @@
     <p:growl id="growl" showDetail="true" />
     <!-- Contenido -->
     <div style="margin-top: 100px; background-color: rgba(255, 255, 255, 0.5);">
-        <h:form id="userProperties">
-            <p:dataGrid value="#{menuClientBean.residentPropertyResources}" var="propertyResident" columns="3">
+        <h:form id="servicesProviders">
+            <p:dataGrid value="#{additionalServiceBean.providers}" var="provider" columns="3">
                 <p:card style="width: 25em">
                     <f:facet name="header">
                         <p:graphicImage value="resources/demo/img/background/background.png" alt="image" />
                     </f:facet>
                     <f:facet name="title">
-                        <h:outputText value="#{propertyResident.resId.resourceType} de #{propertyResident.proId.propertyName}" />
+                        <h:outputText value="#{provider.serviceType}" />
                     </f:facet>
                     <f:facet name="subtitle">
-                        <h:outputText value="Precio minimo: #{propertyResident.minPrice}" />
+                        <h:outputText value="Correo: #{provider.providerEmail}" />
                         <br/>
                     </f:facet>
                     <f:facet name="subtitle">
-                        <h:outputText value="Tiempo minimo: #{propertyResident.minTimeH}" />
+                        <h:outputText value="Precio: #{provider.servicePrice}" />
                         <br/>
                     </f:facet>
                     <f:facet name="subtitle">
-                        <h:outputText value="Capacidad maxima: #{propertyResident.capacity}" />
-                        <br/>
-                    </f:facet>
-                    <f:facet name="subtitle">
-                        <h:outputText value="Correo Responsable: #{propertyResident.bookEmail}" />
-                        <br/>
-                    </f:facet>
-                    <f:facet name="subtitle">
-                        <h:outputText value="Descripción: #{propertyResident.resId.resourceDescription}" />
-                        <br/>
-                        <br/>
-                    </f:facet>
-                    <f:facet name="subtitle">
-                        <h:outputText value="Disponible: #{propertyResident.availabily}" />
+                        <h:outputText value="Descripción: #{provider.serviceDescription}" />
                         <br/>
                     </f:facet>
                     <f:facet name="footer">
-                        <p:commandButton value="Reservar" action="#{menuClientBean.resourceBooking.setPropertyResourceId(propertyResident)}" update="growl" oncomplete="PF('bookingResourceDialog').show()" />
+                        <p:commandButton value="Cotizar" action="#{additionalServiceBean.serviceQuotation.setSvcProviderId(provider)}" update="growl" oncomplete="PF('serviceQuotationDialog').show()" />
+                        <p:commandButton value="Contratar" action="#{additionalServiceBean.serviceRequest.setSvcProviderId(provider)}" update="growl" oncomplete="PF('serviceRequestDialog').show()" />
                     </f:facet>
                 </p:card>
             </p:dataGrid>
         </h:form>
     </div>
 
-    <p:dialog id="bookingResourceDialog" widgetVar="bookingResourceDialog" modal="true" resizable="false" header="Reservar Recurso" styleClass="booking-dialog">
+    <p:dialog id="serviceQuotationDialog" widgetVar="serviceQuotationDialog" modal="true" resizable="false" header="Cotizar Servicio" styleClass="booking-dialog">
         <h:form>
             <div class="booking-form">
                 <div class="input-box">
-                    <label for="bookingDatetime">Fecha y Hora de la Reserva</label>
-                    <p:calendar id="bookingDatetime" placeholder="Seleccione la fecha y hora" pattern="dd/MM/yyyy HH:mm" mask="true"
-                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingDateTime}" required="true" styleClass="calendar-input"/>
+                    <p:selectOneMenu id="property" value="#{additionalServiceBean.selectedProperty}" required="true">
+                        <f:selectItem itemLabel="-- Seleccione una Propiedad --" itemValue=""/>
+                        <f:selectItems value="#{additionalServiceBean.residentProperties}"/>
+                    </p:selectOneMenu>
+                    <i class="fa-solid fa-envelope"></i>
                 </div>
                 <div class="input-box">
-                    <label for="bookingStartDate">Fecha y Hora de Inicio</label>
-                    <p:calendar id="bookingStartDate" placeholder="Seleccione la fecha y hora de inicio" pattern="dd/MM/yyyy HH:mm" mask="true"
-                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingStartDate}" required="true" styleClass="calendar-input"/>
+                    <p:inputText id="description" placeholder="Describe tus peticiones" value="#{additionalServiceBean.serviceQuotation.requestDescription}" required="true"/>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <p:commandButton value="Solicitar Cotización" action="#{additionalServiceBean.sendQouteService()}" update="growl" oncomplete="PF('serviceQuotationDialog').hide()" styleClass="pay-button" />
+            </div>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog id="serviceRequestDialog" widgetVar="serviceRequestDialog" modal="true" resizable="false" header="Contratar Servicio" styleClass="booking-dialog">
+        <h:form>
+            <div class="booking-form">
+                <div class="input-box">
+                    <p:selectOneMenu id="propertyRequest" value="#{additionalServiceBean.selectedProperty}" required="true">
+                        <f:selectItem itemLabel="-- Seleccione una Propiedad --" itemValue=""/>
+                        <f:selectItems value="#{additionalServiceBean.residentProperties}"/>
+                    </p:selectOneMenu>
+                    <i class="fa-solid fa-envelope"></i>
                 </div>
                 <div class="input-box">
-                    <label for="bookingEndDate">Fecha y Hora de Fin</label>
-                    <p:calendar id="bookingEndDate" placeholder="Seleccione la fecha y hora de fin" pattern="dd/MM/yyyy HH:mm" mask="true"
-                                locale="es" navigator="true" value="#{menuClientBean.resourceBooking.bookingEndDate}" required="true" styleClass="calendar-input"/>
+                    <p:inputText id="descriptionRequest" placeholder="Describe tus peticiones" value="#{additionalServiceBean.serviceRequest.requestDescription}" required="true"/>
+                    <i class="fa-solid fa-user"></i>
                 </div>
-                <p:commandButton value="Ir a Pagar" action="#{menuClientBean.goToPay()}" update="growl" oncomplete="PF('bookingResourceDialog').hide()" styleClass="pay-button" />
+                <p:commandButton value="Contratar Servicio" action="#{additionalServiceBean.sendRequestService()}" update="growl" oncomplete="PF('serviceRequestDialog').hide()" styleClass="pay-button" />
             </div>
         </h:form>
     </p:dialog>

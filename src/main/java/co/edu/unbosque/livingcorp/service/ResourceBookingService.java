@@ -35,13 +35,13 @@ public class ResourceBookingService {
         if(!resourceBooking.isPaymentComplete()){
             throw new NonpaymentException("No se ha realizado el pago.");
         }
+        resourceBooking.getPropertyResourceId().setAvailabily("false");
         resourceBooking.setUserName(user);
         return mp.map(resourceBookingDAO.save(mp.map(resourceBooking, ResourceBooking.class)), ResourceBookingDTO.class);
     }
 
     public ResourceBookingDTO payingForResource(ResourceBookingDTO resourceBooking){
         resourceBooking.setPaymentComplete(true);
-        resourceBooking.getPropertyResourceId().setAvailabily("false");
         return resourceBooking;
     }
 

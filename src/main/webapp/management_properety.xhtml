@@ -168,6 +168,7 @@
         }
 
     </style>
+    <f:event type="preRenderView" listener="#{userBean.verifySession()}" />
 </h:head>
 <h:body>
 
@@ -188,6 +189,7 @@
     <!--Information card-->
 
     <h:form>
+        <div style="margin-top: 100px; padding: 20px; background-color: rgba(255, 255, 255, 0.5);">
 
         <p:commandButton value="PDF Propiedades" styleClass="mr-2 mb-2">
             <p:dataExporter type="pdf" target="tbl1" fileName="reportProperties"/>
@@ -221,6 +223,7 @@
                 <h:outputText value="#{statisticsBean.getTotalReservationTimeForResource(propResource)}" />
             </p:column>
         </p:dataTable>
+        </div>
     </h:form>
     <!--::::Pie de Pagina::::::-->
     <footer>

@@ -10,12 +10,14 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "createResourceBean")
 @RequestScoped
-public class CreateResourceBean {
+public class CreateResourceBean implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private ResourceService resourceService;

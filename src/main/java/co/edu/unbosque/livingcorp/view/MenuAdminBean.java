@@ -90,7 +90,7 @@ public class MenuAdminBean implements Serializable {
     public void assingResourceToProperty(){
         try {
             propResource = propResourceService.createPropertyResource(propResource, resourceService
-                    .searchResource(propResourceService.getResourceId(resourceSelected)));
+                    .searchResource(propResourceService.getSelecctedResourceId(resourceSelected)));
             emailService.sendResidentsNotification(propResource);
         } catch (RepeatedObjectException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));

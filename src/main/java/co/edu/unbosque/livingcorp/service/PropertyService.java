@@ -51,4 +51,12 @@ public class PropertyService {
         return propertyDAO.findAll().stream().filter(property -> property.isAvailableForRent() || property.isAvailableForSale()).map(property -> mp.map(property, PropertyDTO.class)).collect(Collectors.toList());
     }
 
+    public int getSelecctedPropertyId(String characters) throws ObjectNotFoundException {
+        String chars[] = characters.split(" - ");
+        if(!chars[0].isEmpty()){
+            return Integer.parseInt(chars[0]);
+        }
+        throw new ObjectNotFoundException("El id no fue encontrado");
+    }
+
 }

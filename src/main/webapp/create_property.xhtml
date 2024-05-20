@@ -240,7 +240,7 @@
         }
 
     </style>
-
+    <f:event type="preRenderView" listener="#{userBean.verifySession()}" />
 </h:head>
 <h:body>
 
@@ -265,8 +265,8 @@
                 <p>Crea un inmueble para venta o renta,</p>
                 <p>aplican terminos y cindiciones </p>
             </div>
-
         </div>
+
         <h:form>
             <div class="input-box">
                 <p:inputText id="propertyName" placeholder="Nombre de la propiedad" value="#{propertyBean.property.propertyName}" required="true" requiredMessage="El nombre es obligatorio."/>
@@ -318,8 +318,9 @@
                 <i class="fa-solid fa-user"></i>
             </div>
 
-            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.createProperty()}" update="@form"/>
+            <p:commandButton value="Registrar Propiedad" action="#{propertyBean.createProperty()}" update="growl"/>
         </h:form>
+        <p:growl id="growl" showDetail="true" />
     </div>
 
 </h:body>

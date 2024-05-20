@@ -8,6 +8,7 @@ import co.edu.unbosque.livingcorp.model.exception.RepeatedObjectException;
 import co.edu.unbosque.livingcorp.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -41,37 +42,42 @@ public class UserBean implements Serializable {
                 user = userService.findUser(user.getUserName());
                 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                 session.setAttribute("userName", user.getUserName());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Bienvenido"));
                 return userService.redirect(user);
             }else{
                 return "login.xhtml";
             }
         } catch (ObjectNotFoundException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         } catch (BlockedUserException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
             return "error_404.xhtml";
         } catch (InvalidPasswordException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         }
+        return "login.xhtml";
     }
 
     public String signUpUser(){
         try {
             userService.signUpUser(user);
         } catch (RepeatedObjectException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         } catch (InvalidPasswordException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cuenta de Cliente Creada"));
         return "search_property.xhtml";
     }
     public String signUpAdmin(){
         try {
             userService.signUpAdmin(user);
         } catch (RepeatedObjectException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         } catch (InvalidPasswordException e) {
-            return "error_404.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
         }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cuenta de Administrador Creada"));
         return "login.xhtml";
     }
 

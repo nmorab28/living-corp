@@ -329,6 +329,7 @@
             height: 30px;
         }
     </style>
+    <f:event type="preRenderView" listener="#{userBean.verifySession()}" />
 </h:head>
 <h:body>
 
@@ -421,7 +422,7 @@
                     <p:inputText id="cvv" value="#{menuClientBean.payment}" placeholder="cvv" maxlength="4" styleClass="cvv-input"/>
                 </div>
             </div>
-            <p:commandButton value="Pagar" action="#{menuClientBean.reserveResource()}" class="submit-btn"/>
+            <p:commandButton value="Pagar" action="#{menuClientBean.reserveResource()}" update="growl" class="submit-btn"/>
         </h:form>
     </div>
 
