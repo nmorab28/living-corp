@@ -14,6 +14,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import java.util.List;
 @SessionScoped
 public class UserBean implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(UserBean.class);
 
     private UserDTO user;
     private List<UserDTO> registeredUsers;
